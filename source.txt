@@ -1,0 +1,10 @@
+data/course_req.tsv
+data/course.tsv
+data/major_arche.tsv
+data/major_req.tsv
+data/major.tsv
+data/parent.tsv
+data/student.tsv
+data/subject.csv
+data/teacher.tsv
+data/user.tsv
