@@ -1,0 +1,6 @@
+out/group.tsv
+out/parenthood.tsv
+out/parent.tsv
+out/student.tsv
+out/teacher.tsv
+out/user.tsv
