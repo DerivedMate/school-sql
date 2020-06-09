@@ -108,22 +108,42 @@ fn gen_teacher(user: &User, j: i64, iter: i64, head: bool) -> String {
         head as i8
     )
 }
-fn group_id_of_index(j: i64) -> i64 {
-    j / c_group_period
+static ASCII_UPPER: [char; 26] = [
+    'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S',
+    'T', 'U', 'V', 'W', 'X', 'Y', 'Z',
+];
+fn make_group_name(id: i16) -> String {
+    let n = ASCII_UPPER.len();
+    let mut out = vec![];
+    let mut j = (id % c_group_period as i16) as usize;
+
+    loop {
+        out.push(ASCII_UPPER[j%n]);
+        j /= n;
+        if j <= 0 {
+            break;
+        }
+    } 
+
+    out.iter().fold(String::new(), |acc, c| c.to_string() + &acc)
+}
+
+fn group_id_of_index(j: i64, iter: i64) -> i64 {
+    iter * (c_iter_size / c_group_period) + j / c_group_period
 }
 fn gen_group(j: i64, iter: i64) -> String {
     let year_0 = 2020;
-    let id = group_id_of_index(j) as i16;
-    let teacher_id = iter * c_teachers + 5;
-    let name = roman::Roman::from(id + 1);
-    let start_year = year_0 + iter;
-    format!("{}	{}	{:X}	{}\n", id, teacher_id, name, start_year)
+    let id = group_id_of_index(j, iter) as i16;
+    let teacher_id = iter * (c_iter_size / c_group_period) + j / c_group_period; // iter * c_teachers + j / (iter+1);
+    let name = make_group_name(id);// roman::Roman::from(id % c_group_period as i16 + 1);
+    let start_year = year_0 + id / c_group_period as i16;
+    format!("{}	{}	{}	{}\n", id, teacher_id, name, start_year)
 }
 
 fn gen_student(j: i64, iter: i64) -> String {
     let id = iter * (c_students - c_teachers) + j - c_teachers;
-    let user_id = j;
-    let group_id = group_id_of_index(j);
+    let user_id = iter * (c_students - c_teachers) + j;
+    let group_id = iter * c_group_period + j/c_group_period - 2;// group_id_of_index(j - c_parents, iter);
 
     format!("{}	{}	{}\n", id, user_id, group_id)
 }
@@ -142,7 +162,15 @@ fn gen_parenthood(j: i64, iter: i64) -> String {
     let parent_id = parent_id_of_index(j, iter);
     let id = iter * (c_parents - c_students) + j - c_students;
     let k = id * (c_students - c_teachers) / (c_parents - c_students);
-    format!("{}	{}	{}\n{}	{}	{}\n", id, parent_id, k, id + 1, parent_id, k + 1)
+    format!(
+        "{}	{}	{}\n{}	{}	{}\n",
+        id,
+        parent_id,
+        k,
+        id + 1,
+        parent_id,
+        k + 1
+    )
 }
 
 fn gen_user_groups() {

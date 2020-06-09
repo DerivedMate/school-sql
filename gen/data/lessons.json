@@ -1,0 +1,2180 @@
+[
+    {
+      "subject": "Etyka",
+      "nr": 105,
+      "days": [
+        "Pn",
+        "Czw"
+      ],
+      "spec": false,
+      "period_id": 0
+    },
+    {
+      "subject": "Biologia",
+      "nr": 102,
+      "days": [
+        "Pn",
+        "Wt",
+        "Śr",
+        "Czw",
+        "Pt"
+      ],
+      "spec": false,
+      "period_id": 1
+    },
+    {
+      "subject": "Biologia",
+      "nr": 203,
+      "days": [
+        "Pn",
+        "Wt",
+        "Śr",
+        "Czw",
+        "Pt"
+      ],
+      "spec": true,
+      "period_id": 1
+    },
+    {
+      "subject": "Biologia",
+      "nr": 206,
+      "days": [
+        "Pn",
+        "Wt",
+        "Śr",
+        "Czw",
+        "Pt"
+      ],
+      "spec": true,
+      "period_id": 1
+    },
+    {
+      "subject": "Chemia",
+      "nr": 102,
+      "days": [
+        "Pn",
+        "Wt",
+        "Śr",
+        "Czw",
+        "Pt"
+      ],
+      "spec": false,
+      "period_id": 1
+    },
+    {
+      "subject": "Chemia",
+      "nr": 206,
+      "days": [
+        "Pn",
+        "Wt",
+        "Śr",
+        "Czw",
+        "Pt"
+      ],
+      "spec": true,
+      "period_id": 1
+    },
+    {
+      "subject": "Filozofia",
+      "nr": 101,
+      "days": [
+        "Pn",
+        "Wt",
+        "Śr",
+        "Czw",
+        "Pt"
+      ],
+      "spec": false,
+      "period_id": 1
+    },
+    {
+      "subject": "Fizyka",
+      "nr": 205,
+      "days": [
+        "Pn",
+        "Wt",
+        "Śr",
+        "Czw",
+        "Pt"
+      ],
+      "spec": true,
+      "period_id": 1
+    },
+    {
+      "subject": "Język angielski",
+      "nr": 103,
+      "days": [
+        "Wt",
+        "Czw"
+      ],
+      "spec": false,
+      "period_id": 1
+    },
+    {
+      "subject": "Język angielski",
+      "nr": 103,
+      "days": [
+        "Pn",
+        "Śr",
+        "Pt"
+      ],
+      "spec": false,
+      "period_id": 1
+    },
+    {
+      "subject": "Język angielski",
+      "nr": 104,
+      "days": [
+        "Wt",
+        "Czw"
+      ],
+      "spec": false,
+      "period_id": 1
+    },
+    {
+      "subject": "Język angielski",
+      "nr": 105,
+      "days": [
+        "Pn",
+        "Śr",
+        "Pt"
+      ],
+      "spec": false,
+      "period_id": 1
+    },
+    {
+      "subject": "Język angielski",
+      "nr": 106,
+      "days": [
+        "Wt",
+        "Czw"
+      ],
+      "spec": false,
+      "period_id": 1
+    },
+    {
+      "subject": "Język angielski",
+      "nr": 201,
+      "days": [
+        "Pn",
+        "Wt",
+        "Śr",
+        "Czw",
+        "Pt"
+      ],
+      "spec": true,
+      "period_id": 1
+    },
+    {
+      "subject": "Język angielski",
+      "nr": 213,
+      "days": [
+        "Pn",
+        "Wt",
+        "Śr",
+        "Czw",
+        "Pt"
+      ],
+      "spec": true,
+      "period_id": 1
+    },
+    {
+      "subject": "Język hiszpański",
+      "nr": 101,
+      "days": [
+        "Pn",
+        "Wt",
+        "Śr",
+        "Czw",
+        "Pt"
+      ],
+      "spec": false,
+      "period_id": 1
+    },
+    {
+      "subject": "Język niemiecki",
+      "nr": 105,
+      "days": [
+        "Wt",
+        "Czw"
+      ],
+      "spec": false,
+      "period_id": 1
+    },
+    {
+      "subject": "Język polski",
+      "nr": 107,
+      "days": [
+        "Pn",
+        "Wt",
+        "Śr",
+        "Czw",
+        "Pt"
+      ],
+      "spec": false,
+      "period_id": 1
+    },
+    {
+      "subject": "Język polski",
+      "nr": 206,
+      "days": [
+        "Pn",
+        "Wt",
+        "Śr",
+        "Czw",
+        "Pt"
+      ],
+      "spec": true,
+      "period_id": 1
+    },
+    {
+      "subject": "Matematyka",
+      "nr": 102,
+      "days": [
+        "Pn",
+        "Śr",
+        "Pt"
+      ],
+      "spec": false,
+      "period_id": 1
+    },
+    {
+      "subject": "Matematyka",
+      "nr": 102,
+      "days": [
+        "Wt",
+        "Czw"
+      ],
+      "spec": false,
+      "period_id": 1
+    },
+    {
+      "subject": "Matematyka",
+      "nr": 104,
+      "days": [
+        "Pn",
+        "Wt",
+        "Śr",
+        "Czw",
+        "Pt"
+      ],
+      "spec": false,
+      "period_id": 1
+    },
+    {
+      "subject": "Religia",
+      "nr": 107,
+      "days": [
+        "Pn",
+        "Wt"
+      ],
+      "spec": false,
+      "period_id": 1
+    },
+    {
+      "subject": "Wychowanie fizyczne",
+      "nr": 101,
+      "days": [
+        "Pn",
+        "Wt",
+        "Śr"
+      ],
+      "spec": false,
+      "period_id": 1
+    },
+    {
+      "subject": "Wychowanie fizyczne",
+      "nr": 104,
+      "days": [
+        "Pn",
+        "Wt",
+        "Śr"
+      ],
+      "spec": false,
+      "period_id": 1
+    },
+    {
+      "subject": "Wychowanie fizyczne",
+      "nr": 104,
+      "days": [
+        "Pn",
+        "Wt",
+        "Śr"
+      ],
+      "spec": false,
+      "period_id": 1
+    },
+    {
+      "subject": "Wychowanie fizyczne",
+      "nr": 107,
+      "days": [
+        "Czw",
+        "Pt"
+      ],
+      "spec": false,
+      "period_id": 1
+    },
+    {
+      "subject": "Wychowanie fizyczne",
+      "nr": 107,
+      "days": [
+        "Czw",
+        "Pt"
+      ],
+      "spec": false,
+      "period_id": 1
+    },
+    {
+      "subject": "Biologia",
+      "nr": 102,
+      "days": [
+        "Pn",
+        "Wt",
+        "Śr",
+        "Czw",
+        "Pt"
+      ],
+      "spec": false,
+      "period_id": 2
+    },
+    {
+      "subject": "Biologia",
+      "nr": 206,
+      "days": [
+        "Pn",
+        "Wt",
+        "Śr",
+        "Czw",
+        "Pt"
+      ],
+      "spec": true,
+      "period_id": 2
+    },
+    {
+      "subject": "Chemia",
+      "nr": 201,
+      "days": [
+        "Pn",
+        "Wt",
+        "Śr",
+        "Czw",
+        "Pt"
+      ],
+      "spec": true,
+      "period_id": 2
+    },
+    {
+      "subject": "Chemia",
+      "nr": 204,
+      "days": [
+        "Pn",
+        "Wt",
+        "Śr",
+        "Czw",
+        "Pt"
+      ],
+      "spec": true,
+      "period_id": 2
+    },
+    {
+      "subject": "Filozofia",
+      "nr": 101,
+      "days": [
+        "Pn",
+        "Wt",
+        "Śr",
+        "Czw",
+        "Pt"
+      ],
+      "spec": false,
+      "period_id": 2
+    },
+    {
+      "subject": "Fizyka",
+      "nr": 102,
+      "days": [
+        "Pn",
+        "Wt",
+        "Śr",
+        "Czw",
+        "Pt"
+      ],
+      "spec": false,
+      "period_id": 2
+    },
+    {
+      "subject": "Geografia",
+      "nr": 204,
+      "days": [
+        "Pn",
+        "Wt",
+        "Śr",
+        "Czw",
+        "Pt"
+      ],
+      "spec": true,
+      "period_id": 2
+    },
+    {
+      "subject": "Historia",
+      "nr": 104,
+      "days": [
+        "Pn",
+        "Wt",
+        "Śr",
+        "Czw",
+        "Pt"
+      ],
+      "spec": false,
+      "period_id": 2
+    },
+    {
+      "subject": "Język angielski",
+      "nr": 100,
+      "days": [
+        "Pn",
+        "Wt",
+        "Śr",
+        "Czw",
+        "Pt"
+      ],
+      "spec": false,
+      "period_id": 2
+    },
+    {
+      "subject": "Język angielski",
+      "nr": 103,
+      "days": [
+        "Wt",
+        "Czw"
+      ],
+      "spec": false,
+      "period_id": 2
+    },
+    {
+      "subject": "Język angielski",
+      "nr": 103,
+      "days": [
+        "Pn",
+        "Śr",
+        "Pt"
+      ],
+      "spec": false,
+      "period_id": 2
+    },
+    {
+      "subject": "Język angielski",
+      "nr": 104,
+      "days": [
+        "Wt",
+        "Czw"
+      ],
+      "spec": false,
+      "period_id": 2
+    },
+    {
+      "subject": "Język angielski",
+      "nr": 104,
+      "days": [
+        "Pn",
+        "Śr",
+        "Pt"
+      ],
+      "spec": false,
+      "period_id": 2
+    },
+    {
+      "subject": "Język angielski",
+      "nr": 105,
+      "days": [
+        "Pn",
+        "Wt",
+        "Śr",
+        "Czw",
+        "Pt"
+      ],
+      "spec": false,
+      "period_id": 2
+    },
+    {
+      "subject": "Język angielski",
+      "nr": 105,
+      "days": [
+        "Pn",
+        "Śr",
+        "Pt"
+      ],
+      "spec": false,
+      "period_id": 2
+    },
+    {
+      "subject": "Język angielski",
+      "nr": 206,
+      "days": [
+        "Pn",
+        "Wt",
+        "Śr",
+        "Czw",
+        "Pt"
+      ],
+      "spec": true,
+      "period_id": 2
+    },
+    {
+      "subject": "Język angielski",
+      "nr": 208,
+      "days": [
+        "Pn",
+        "Wt",
+        "Śr",
+        "Czw",
+        "Pt"
+      ],
+      "spec": true,
+      "period_id": 2
+    },
+    {
+      "subject": "Język hiszpański",
+      "nr": 102,
+      "days": [
+        "Pn",
+        "Wt",
+        "Śr",
+        "Czw",
+        "Pt"
+      ],
+      "spec": false,
+      "period_id": 2
+    },
+    {
+      "subject": "Język niemiecki",
+      "nr": 100,
+      "days": [
+        "Pn",
+        "Wt",
+        "Śr",
+        "Czw",
+        "Pt"
+      ],
+      "spec": false,
+      "period_id": 2
+    },
+    {
+      "subject": "Język polski",
+      "nr": 107,
+      "days": [
+        "Pn",
+        "Wt",
+        "Śr",
+        "Czw",
+        "Pt"
+      ],
+      "spec": false,
+      "period_id": 2
+    },
+    {
+      "subject": "Język polski",
+      "nr": 205,
+      "days": [
+        "Pn",
+        "Wt",
+        "Śr",
+        "Czw",
+        "Pt"
+      ],
+      "spec": true,
+      "period_id": 2
+    },
+    {
+      "subject": "Matematyka",
+      "nr": 102,
+      "days": [
+        "Pn",
+        "Śr",
+        "Pt"
+      ],
+      "spec": false,
+      "period_id": 2
+    },
+    {
+      "subject": "Matematyka",
+      "nr": 102,
+      "days": [
+        "Wt",
+        "Czw"
+      ],
+      "spec": false,
+      "period_id": 2
+    },
+    {
+      "subject": "Matematyka",
+      "nr": 104,
+      "days": [
+        "Pn",
+        "Wt",
+        "Śr",
+        "Czw",
+        "Pt"
+      ],
+      "spec": false,
+      "period_id": 2
+    },
+    {
+      "subject": "Religia",
+      "nr": 107,
+      "days": [
+        "Pn",
+        "Wt"
+      ],
+      "spec": false,
+      "period_id": 2
+    },
+    {
+      "subject": "Wychowanie fizyczne",
+      "nr": 101,
+      "days": [
+        "Pn",
+        "Wt",
+        "Śr"
+      ],
+      "spec": false,
+      "period_id": 2
+    },
+    {
+      "subject": "Wychowanie fizyczne",
+      "nr": 101,
+      "days": [
+        "Pn",
+        "Wt",
+        "Śr"
+      ],
+      "spec": false,
+      "period_id": 2
+    },
+    {
+      "subject": "Wychowanie fizyczne",
+      "nr": 104,
+      "days": [
+        "Pn",
+        "Wt",
+        "Śr"
+      ],
+      "spec": false,
+      "period_id": 2
+    },
+    {
+      "subject": "Wychowanie fizyczne",
+      "nr": 107,
+      "days": [
+        "Czw",
+        "Pt"
+      ],
+      "spec": false,
+      "period_id": 2
+    },
+    {
+      "subject": "Biologia",
+      "nr": 203,
+      "days": [
+        "Pn",
+        "Wt",
+        "Śr",
+        "Czw",
+        "Pt"
+      ],
+      "spec": true,
+      "period_id": 3
+    },
+    {
+      "subject": "Biologia",
+      "nr": 206,
+      "days": [
+        "Pn",
+        "Wt",
+        "Śr",
+        "Czw",
+        "Pt"
+      ],
+      "spec": true,
+      "period_id": 3
+    },
+    {
+      "subject": "Chemia",
+      "nr": 201,
+      "days": [
+        "Pn",
+        "Wt",
+        "Śr",
+        "Czw",
+        "Pt"
+      ],
+      "spec": true,
+      "period_id": 3
+    },
+    {
+      "subject": "Chemia",
+      "nr": 204,
+      "days": [
+        "Pn",
+        "Wt",
+        "Śr",
+        "Czw",
+        "Pt"
+      ],
+      "spec": true,
+      "period_id": 3
+    },
+    {
+      "subject": "Filozofia",
+      "nr": 101,
+      "days": [
+        "Pn",
+        "Wt",
+        "Śr",
+        "Czw",
+        "Pt"
+      ],
+      "spec": false,
+      "period_id": 3
+    },
+    {
+      "subject": "Fizyka",
+      "nr": 202,
+      "days": [
+        "Pn",
+        "Wt",
+        "Śr",
+        "Czw",
+        "Pt"
+      ],
+      "spec": true,
+      "period_id": 3
+    },
+    {
+      "subject": "Geografia",
+      "nr": 102,
+      "days": [
+        "Pn",
+        "Wt",
+        "Śr",
+        "Czw",
+        "Pt"
+      ],
+      "spec": false,
+      "period_id": 3
+    },
+    {
+      "subject": "Historia",
+      "nr": 205,
+      "days": [
+        "Pn",
+        "Wt",
+        "Śr",
+        "Czw",
+        "Pt"
+      ],
+      "spec": true,
+      "period_id": 3
+    },
+    {
+      "subject": "Informatyka",
+      "nr": 102,
+      "days": [
+        "Pn",
+        "Wt",
+        "Śr",
+        "Czw",
+        "Pt"
+      ],
+      "spec": false,
+      "period_id": 3
+    },
+    {
+      "subject": "Język angielski",
+      "nr": 100,
+      "days": [
+        "Pn",
+        "Wt",
+        "Śr",
+        "Czw",
+        "Pt"
+      ],
+      "spec": false,
+      "period_id": 3
+    },
+    {
+      "subject": "Język angielski",
+      "nr": 100,
+      "days": [
+        "Pn",
+        "Wt",
+        "Śr",
+        "Czw",
+        "Pt"
+      ],
+      "spec": false,
+      "period_id": 3
+    },
+    {
+      "subject": "Język angielski",
+      "nr": 105,
+      "days": [
+        "Pn",
+        "Wt",
+        "Śr",
+        "Czw",
+        "Pt"
+      ],
+      "spec": false,
+      "period_id": 3
+    },
+    {
+      "subject": "Język angielski",
+      "nr": 204,
+      "days": [
+        "Pn",
+        "Wt",
+        "Śr",
+        "Czw",
+        "Pt"
+      ],
+      "spec": true,
+      "period_id": 3
+    },
+    {
+      "subject": "Język niemiecki",
+      "nr": 203,
+      "days": [
+        "Pn",
+        "Wt",
+        "Śr",
+        "Czw",
+        "Pt"
+      ],
+      "spec": true,
+      "period_id": 3
+    },
+    {
+      "subject": "Język polski",
+      "nr": 107,
+      "days": [
+        "Pn",
+        "Wt",
+        "Śr",
+        "Czw",
+        "Pt"
+      ],
+      "spec": false,
+      "period_id": 3
+    },
+    {
+      "subject": "Język polski",
+      "nr": 202,
+      "days": [
+        "Pn",
+        "Wt",
+        "Śr",
+        "Czw",
+        "Pt"
+      ],
+      "spec": true,
+      "period_id": 3
+    },
+    {
+      "subject": "Język rosyjski",
+      "nr": 103,
+      "days": [
+        "Pn",
+        "Wt",
+        "Śr",
+        "Czw",
+        "Pt"
+      ],
+      "spec": false,
+      "period_id": 3
+    },
+    {
+      "subject": "Język włoski",
+      "nr": 103,
+      "days": [
+        "Pn",
+        "Wt",
+        "Śr",
+        "Czw",
+        "Pt"
+      ],
+      "spec": false,
+      "period_id": 3
+    },
+    {
+      "subject": "Matematyka",
+      "nr": 101,
+      "days": [
+        "Pn",
+        "Śr",
+        "Czw",
+        "Pt"
+      ],
+      "spec": false,
+      "period_id": 3
+    },
+    {
+      "subject": "Matematyka",
+      "nr": 101,
+      "days": [
+        "Pn",
+        "Wt",
+        "Śr",
+        "Czw",
+        "Pt"
+      ],
+      "spec": false,
+      "period_id": 3
+    },
+    {
+      "subject": "Matematyka",
+      "nr": 104,
+      "days": [
+        "Pn",
+        "Wt",
+        "Śr",
+        "Czw",
+        "Pt"
+      ],
+      "spec": false,
+      "period_id": 3
+    },
+    {
+      "subject": "Matematyka",
+      "nr": 205,
+      "days": [
+        "Pn",
+        "Wt",
+        "Śr",
+        "Czw",
+        "Pt"
+      ],
+      "spec": true,
+      "period_id": 3
+    },
+    {
+      "subject": "Religia",
+      "nr": 107,
+      "days": [
+        "Pn",
+        "Wt"
+      ],
+      "spec": false,
+      "period_id": 3
+    },
+    {
+      "subject": "Wychowanie fizyczne",
+      "nr": 104,
+      "days": [
+        "Pn",
+        "Wt",
+        "Śr"
+      ],
+      "spec": false,
+      "period_id": 3
+    },
+    {
+      "subject": "Wychowanie fizyczne",
+      "nr": 104,
+      "days": [
+        "Pn",
+        "Wt",
+        "Śr"
+      ],
+      "spec": false,
+      "period_id": 3
+    },
+    {
+      "subject": "Wychowanie fizyczne",
+      "nr": 107,
+      "days": [
+        "Czw",
+        "Pt"
+      ],
+      "spec": false,
+      "period_id": 3
+    },
+    {
+      "subject": "Biologia",
+      "nr": 102,
+      "days": [
+        "Pn",
+        "Śr",
+        "Czw",
+        "Pt"
+      ],
+      "spec": false,
+      "period_id": 4
+    },
+    {
+      "subject": "Chemia",
+      "nr": 201,
+      "days": [
+        "Pn",
+        "Śr",
+        "Czw",
+        "Pt"
+      ],
+      "spec": true,
+      "period_id": 4
+    },
+    {
+      "subject": "Fizyka",
+      "nr": 205,
+      "days": [
+        "Pn",
+        "Śr",
+        "Czw",
+        "Pt"
+      ],
+      "spec": true,
+      "period_id": 4
+    },
+    {
+      "subject": "Geografia",
+      "nr": 201,
+      "days": [
+        "Pn",
+        "Śr",
+        "Czw",
+        "Pt"
+      ],
+      "spec": true,
+      "period_id": 4
+    },
+    {
+      "subject": "Historia",
+      "nr": 104,
+      "days": [
+        "Pn",
+        "Śr",
+        "Czw",
+        "Pt"
+      ],
+      "spec": false,
+      "period_id": 4
+    },
+    {
+      "subject": "Historia",
+      "nr": 202,
+      "days": [
+        "Pn",
+        "Śr",
+        "Czw",
+        "Pt"
+      ],
+      "spec": true,
+      "period_id": 4
+    },
+    {
+      "subject": "Język angielski",
+      "nr": 104,
+      "days": [
+        "Pn",
+        "Śr",
+        "Czw",
+        "Pt"
+      ],
+      "spec": false,
+      "period_id": 4
+    },
+    {
+      "subject": "Język angielski",
+      "nr": 104,
+      "days": [
+        "Pn",
+        "Śr",
+        "Czw",
+        "Pt"
+      ],
+      "spec": false,
+      "period_id": 4
+    },
+    {
+      "subject": "Język angielski",
+      "nr": 106,
+      "days": [
+        "Pn",
+        "Śr",
+        "Czw",
+        "Pt"
+      ],
+      "spec": false,
+      "period_id": 4
+    },
+    {
+      "subject": "Język angielski",
+      "nr": 107,
+      "days": [
+        "Pn",
+        "Śr",
+        "Czw",
+        "Pt"
+      ],
+      "spec": false,
+      "period_id": 4
+    },
+    {
+      "subject": "Język angielski",
+      "nr": 201,
+      "days": [
+        "Pn",
+        "Śr",
+        "Czw",
+        "Pt"
+      ],
+      "spec": true,
+      "period_id": 4
+    },
+    {
+      "subject": "Język angielski",
+      "nr": 211,
+      "days": [
+        "Pn",
+        "Śr",
+        "Czw",
+        "Pt"
+      ],
+      "spec": true,
+      "period_id": 4
+    },
+    {
+      "subject": "Język hiszpański",
+      "nr": 103,
+      "days": [
+        "Pn",
+        "Śr",
+        "Czw",
+        "Pt"
+      ],
+      "spec": false,
+      "period_id": 4
+    },
+    {
+      "subject": "Język niemiecki",
+      "nr": 105,
+      "days": [
+        "Pn",
+        "Śr",
+        "Czw",
+        "Pt"
+      ],
+      "spec": false,
+      "period_id": 4
+    },
+    {
+      "subject": "Język niemiecki",
+      "nr": 206,
+      "days": [
+        "Pn",
+        "Śr",
+        "Czw",
+        "Pt"
+      ],
+      "spec": true,
+      "period_id": 4
+    },
+    {
+      "subject": "Język polski",
+      "nr": 107,
+      "days": [
+        "Pn",
+        "Śr",
+        "Czw",
+        "Pt"
+      ],
+      "spec": false,
+      "period_id": 4
+    },
+    {
+      "subject": "Język rosyjski",
+      "nr": 103,
+      "days": [
+        "Pn",
+        "Śr",
+        "Czw",
+        "Pt"
+      ],
+      "spec": false,
+      "period_id": 4
+    },
+    {
+      "subject": "Matematyka",
+      "nr": 101,
+      "days": [
+        "Pn",
+        "Śr",
+        "Czw",
+        "Pt"
+      ],
+      "spec": false,
+      "period_id": 4
+    },
+    {
+      "subject": "Matematyka",
+      "nr": 104,
+      "days": [
+        "Pn",
+        "Śr",
+        "Czw",
+        "Pt"
+      ],
+      "spec": false,
+      "period_id": 4
+    },
+    {
+      "subject": "Matematyka",
+      "nr": 104,
+      "days": [
+        "Pn",
+        "Śr",
+        "Czw",
+        "Pt"
+      ],
+      "spec": false,
+      "period_id": 4
+    },
+    {
+      "subject": "Religia",
+      "nr": 107,
+      "days": [
+        "Pn"
+      ],
+      "spec": false,
+      "period_id": 4
+    },
+    {
+      "subject": "Wychowanie fizyczne",
+      "nr": 101,
+      "days": [
+        "Pn",
+        "Śr"
+      ],
+      "spec": false,
+      "period_id": 4
+    },
+    {
+      "subject": "Wychowanie fizyczne",
+      "nr": 104,
+      "days": [
+        "Pn",
+        "Śr"
+      ],
+      "spec": false,
+      "period_id": 4
+    },
+    {
+      "subject": "Wychowanie fizyczne",
+      "nr": 107,
+      "days": [
+        "Czw",
+        "Pt"
+      ],
+      "spec": false,
+      "period_id": 4
+    },
+    {
+      "subject": "Wychowanie fizyczne",
+      "nr": 107,
+      "days": [
+        "Czw",
+        "Pt"
+      ],
+      "spec": false,
+      "period_id": 4
+    },
+    {
+      "subject": "Biologia",
+      "nr": 203,
+      "days": [
+        "Pn",
+        "Śr",
+        "Czw",
+        "Pt"
+      ],
+      "spec": true,
+      "period_id": 5
+    },
+    {
+      "subject": "Chemia",
+      "nr": 204,
+      "days": [
+        "Pn",
+        "Śr",
+        "Czw",
+        "Pt"
+      ],
+      "spec": true,
+      "period_id": 5
+    },
+    {
+      "subject": "Filozofia",
+      "nr": 101,
+      "days": [
+        "Pn",
+        "Śr",
+        "Czw",
+        "Pt"
+      ],
+      "spec": false,
+      "period_id": 5
+    },
+    {
+      "subject": "Geografia",
+      "nr": 102,
+      "days": [
+        "Pn",
+        "Śr",
+        "Czw",
+        "Pt"
+      ],
+      "spec": false,
+      "period_id": 5
+    },
+    {
+      "subject": "Geografia",
+      "nr": 201,
+      "days": [
+        "Pn",
+        "Śr",
+        "Czw",
+        "Pt"
+      ],
+      "spec": true,
+      "period_id": 5
+    },
+    {
+      "subject": "Historia",
+      "nr": 104,
+      "days": [
+        "Pn",
+        "Śr",
+        "Czw",
+        "Pt"
+      ],
+      "spec": false,
+      "period_id": 5
+    },
+    {
+      "subject": "Informatyka",
+      "nr": 204,
+      "days": [
+        "Pn",
+        "Śr",
+        "Czw",
+        "Pt"
+      ],
+      "spec": true,
+      "period_id": 5
+    },
+    {
+      "subject": "Język angielski",
+      "nr": 100,
+      "days": [
+        "Pn",
+        "Śr",
+        "Czw",
+        "Pt"
+      ],
+      "spec": false,
+      "period_id": 5
+    },
+    {
+      "subject": "Język angielski",
+      "nr": 100,
+      "days": [
+        "Pn",
+        "Śr",
+        "Czw",
+        "Pt"
+      ],
+      "spec": false,
+      "period_id": 5
+    },
+    {
+      "subject": "Język angielski",
+      "nr": 100,
+      "days": [
+        "Pn",
+        "Śr",
+        "Czw",
+        "Pt"
+      ],
+      "spec": false,
+      "period_id": 5
+    },
+    {
+      "subject": "Język angielski",
+      "nr": 100,
+      "days": [
+        "Pn",
+        "Śr",
+        "Czw",
+        "Pt"
+      ],
+      "spec": false,
+      "period_id": 5
+    },
+    {
+      "subject": "Język angielski",
+      "nr": 105,
+      "days": [
+        "Pn",
+        "Śr",
+        "Czw",
+        "Pt"
+      ],
+      "spec": false,
+      "period_id": 5
+    },
+    {
+      "subject": "Język angielski",
+      "nr": 106,
+      "days": [
+        "Pn",
+        "Śr",
+        "Czw",
+        "Pt"
+      ],
+      "spec": false,
+      "period_id": 5
+    },
+    {
+      "subject": "Język angielski",
+      "nr": 111,
+      "days": [
+        "Pn",
+        "Śr",
+        "Czw",
+        "Pt"
+      ],
+      "spec": false,
+      "period_id": 5
+    },
+    {
+      "subject": "Język angielski",
+      "nr": 206,
+      "days": [
+        "Pn",
+        "Śr",
+        "Czw",
+        "Pt"
+      ],
+      "spec": true,
+      "period_id": 5
+    },
+    {
+      "subject": "Język niemiecki",
+      "nr": 105,
+      "days": [
+        "Pn",
+        "Śr",
+        "Czw",
+        "Pt"
+      ],
+      "spec": false,
+      "period_id": 5
+    },
+    {
+      "subject": "Język polski",
+      "nr": 107,
+      "days": [
+        "Pn",
+        "Śr",
+        "Czw",
+        "Pt"
+      ],
+      "spec": false,
+      "period_id": 5
+    },
+    {
+      "subject": "Język polski",
+      "nr": 107,
+      "days": [
+        "Pn",
+        "Śr",
+        "Czw",
+        "Pt"
+      ],
+      "spec": false,
+      "period_id": 5
+    },
+    {
+      "subject": "Język rosyjski",
+      "nr": 102,
+      "days": [
+        "Pn",
+        "Śr",
+        "Czw",
+        "Pt"
+      ],
+      "spec": false,
+      "period_id": 5
+    },
+    {
+      "subject": "Matematyka",
+      "nr": 104,
+      "days": [
+        "Pn",
+        "Śr",
+        "Czw",
+        "Pt"
+      ],
+      "spec": false,
+      "period_id": 5
+    },
+    {
+      "subject": "Matematyka",
+      "nr": 205,
+      "days": [
+        "Pn",
+        "Śr",
+        "Czw",
+        "Pt"
+      ],
+      "spec": true,
+      "period_id": 5
+    },
+    {
+      "subject": "Religia",
+      "nr": 107,
+      "days": [
+        "Pn"
+      ],
+      "spec": false,
+      "period_id": 5
+    },
+    {
+      "subject": "Wiedza o społeczeństwie",
+      "nr": 203,
+      "days": [
+        "Pn",
+        "Śr",
+        "Czw",
+        "Pt"
+      ],
+      "spec": true,
+      "period_id": 5
+    },
+    {
+      "subject": "Wychowanie fizyczne",
+      "nr": 104,
+      "days": [
+        "Pn",
+        "Śr"
+      ],
+      "spec": false,
+      "period_id": 5
+    },
+    {
+      "subject": "Wychowanie fizyczne",
+      "nr": 104,
+      "days": [
+        "Pn",
+        "Śr"
+      ],
+      "spec": false,
+      "period_id": 5
+    },
+    {
+      "subject": "Wychowanie fizyczne",
+      "nr": 107,
+      "days": [
+        "Czw",
+        "Pt"
+      ],
+      "spec": false,
+      "period_id": 5
+    },
+    {
+      "subject": "Biologia",
+      "nr": 203,
+      "days": [
+        "Pn",
+        "Śr",
+        "Czw",
+        "Pt"
+      ],
+      "spec": true,
+      "period_id": 6
+    },
+    {
+      "subject": "Biologia",
+      "nr": 206,
+      "days": [
+        "Pn",
+        "Śr",
+        "Czw",
+        "Pt"
+      ],
+      "spec": true,
+      "period_id": 6
+    },
+    {
+      "subject": "Chemia",
+      "nr": 204,
+      "days": [
+        "Pn",
+        "Śr",
+        "Czw",
+        "Pt"
+      ],
+      "spec": true,
+      "period_id": 6
+    },
+    {
+      "subject": "Fizyka",
+      "nr": 202,
+      "days": [
+        "Pn",
+        "Śr",
+        "Czw",
+        "Pt"
+      ],
+      "spec": true,
+      "period_id": 6
+    },
+    {
+      "subject": "Geografia",
+      "nr": 201,
+      "days": [
+        "Pn",
+        "Śr",
+        "Czw",
+        "Pt"
+      ],
+      "spec": true,
+      "period_id": 6
+    },
+    {
+      "subject": "Historia",
+      "nr": 104,
+      "days": [
+        "Pn",
+        "Śr",
+        "Czw",
+        "Pt"
+      ],
+      "spec": false,
+      "period_id": 6
+    },
+    {
+      "subject": "Historia sztuki",
+      "nr": 204,
+      "days": [
+        "Pn",
+        "Śr",
+        "Czw",
+        "Pt"
+      ],
+      "spec": true,
+      "period_id": 6
+    },
+    {
+      "subject": "Informatyka",
+      "nr": 102,
+      "days": [
+        "Pn",
+        "Śr",
+        "Czw",
+        "Pt"
+      ],
+      "spec": false,
+      "period_id": 6
+    },
+    {
+      "subject": "Język angielski",
+      "nr": 100,
+      "days": [
+        "Pn",
+        "Śr",
+        "Czw",
+        "Pt"
+      ],
+      "spec": false,
+      "period_id": 6
+    },
+    {
+      "subject": "Język angielski",
+      "nr": 100,
+      "days": [
+        "Pn",
+        "Śr",
+        "Czw",
+        "Pt"
+      ],
+      "spec": false,
+      "period_id": 6
+    },
+    {
+      "subject": "Język angielski",
+      "nr": 108,
+      "days": [
+        "Pn",
+        "Śr",
+        "Czw",
+        "Pt"
+      ],
+      "spec": false,
+      "period_id": 6
+    },
+    {
+      "subject": "Język angielski",
+      "nr": 205,
+      "days": [
+        "Pn",
+        "Śr",
+        "Czw",
+        "Pt"
+      ],
+      "spec": true,
+      "period_id": 6
+    },
+    {
+      "subject": "Język angielski",
+      "nr": 208,
+      "days": [
+        "Pn",
+        "Śr",
+        "Czw",
+        "Pt"
+      ],
+      "spec": true,
+      "period_id": 6
+    },
+    {
+      "subject": "Język francuski",
+      "nr": 103,
+      "days": [
+        "Pn",
+        "Śr",
+        "Czw",
+        "Pt"
+      ],
+      "spec": false,
+      "period_id": 6
+    },
+    {
+      "subject": "Język hiszpański",
+      "nr": 103,
+      "days": [
+        "Pn",
+        "Śr",
+        "Czw",
+        "Pt"
+      ],
+      "spec": false,
+      "period_id": 6
+    },
+    {
+      "subject": "Język niemiecki",
+      "nr": 106,
+      "days": [
+        "Pn",
+        "Śr",
+        "Czw",
+        "Pt"
+      ],
+      "spec": false,
+      "period_id": 6
+    },
+    {
+      "subject": "Język polski",
+      "nr": 107,
+      "days": [
+        "Pn",
+        "Śr",
+        "Czw",
+        "Pt"
+      ],
+      "spec": false,
+      "period_id": 6
+    },
+    {
+      "subject": "Matematyka",
+      "nr": 101,
+      "days": [
+        "Pn",
+        "Śr",
+        "Czw",
+        "Pt"
+      ],
+      "spec": false,
+      "period_id": 6
+    },
+    {
+      "subject": "Matematyka",
+      "nr": 104,
+      "days": [
+        "Pn",
+        "Śr",
+        "Czw",
+        "Pt"
+      ],
+      "spec": false,
+      "period_id": 6
+    },
+    {
+      "subject": "Matematyka",
+      "nr": 205,
+      "days": [
+        "Pn",
+        "Śr",
+        "Czw",
+        "Pt"
+      ],
+      "spec": true,
+      "period_id": 6
+    },
+    {
+      "subject": "Religia",
+      "nr": 107,
+      "days": [
+        "Pn"
+      ],
+      "spec": false,
+      "period_id": 6
+    },
+    {
+      "subject": "Wychowanie fizyczne",
+      "nr": 104,
+      "days": [
+        "Pn",
+        "Śr"
+      ],
+      "spec": false,
+      "period_id": 6
+    },
+    {
+      "subject": "Wychowanie fizyczne",
+      "nr": 104,
+      "days": [
+        "Pn",
+        "Śr"
+      ],
+      "spec": false,
+      "period_id": 6
+    },
+    {
+      "subject": "Wychowanie fizyczne",
+      "nr": 107,
+      "days": [
+        "Czw",
+        "Pt"
+      ],
+      "spec": false,
+      "period_id": 6
+    },
+    {
+      "subject": "Wychowanie fizyczne",
+      "nr": 107,
+      "days": [
+        "Czw",
+        "Pt"
+      ],
+      "spec": false,
+      "period_id": 6
+    },
+    {
+      "subject": "Biologia",
+      "nr": 203,
+      "days": [
+        "Pn",
+        "Śr",
+        "Czw",
+        "Pt"
+      ],
+      "spec": true,
+      "period_id": 7
+    },
+    {
+      "subject": "Biologia",
+      "nr": 206,
+      "days": [
+        "Pn",
+        "Śr",
+        "Czw",
+        "Pt"
+      ],
+      "spec": true,
+      "period_id": 7
+    },
+    {
+      "subject": "Chemia",
+      "nr": 206,
+      "days": [
+        "Pn",
+        "Śr",
+        "Czw",
+        "Pt"
+      ],
+      "spec": true,
+      "period_id": 7
+    },
+    {
+      "subject": "Filozofia",
+      "nr": 101,
+      "days": [
+        "Pn",
+        "Śr",
+        "Czw",
+        "Pt"
+      ],
+      "spec": false,
+      "period_id": 7
+    },
+    {
+      "subject": "Fizyka",
+      "nr": 102,
+      "days": [
+        "Pn",
+        "Śr",
+        "Czw",
+        "Pt"
+      ],
+      "spec": false,
+      "period_id": 7
+    },
+    {
+      "subject": "Geografia",
+      "nr": 204,
+      "days": [
+        "Pn",
+        "Śr",
+        "Czw",
+        "Pt"
+      ],
+      "spec": true,
+      "period_id": 7
+    },
+    {
+      "subject": "Historia",
+      "nr": 104,
+      "days": [
+        "Pn",
+        "Śr",
+        "Czw",
+        "Pt"
+      ],
+      "spec": false,
+      "period_id": 7
+    },
+    {
+      "subject": "Historia",
+      "nr": 104,
+      "days": [
+        "Pn",
+        "Śr",
+        "Czw",
+        "Pt"
+      ],
+      "spec": false,
+      "period_id": 7
+    },
+    {
+      "subject": "Historia",
+      "nr": 104,
+      "days": [
+        "Pn",
+        "Śr",
+        "Czw",
+        "Pt"
+      ],
+      "spec": false,
+      "period_id": 7
+    },
+    {
+      "subject": "Język angielski",
+      "nr": 105,
+      "days": [
+        "Pn",
+        "Śr",
+        "Czw",
+        "Pt"
+      ],
+      "spec": false,
+      "period_id": 7
+    },
+    {
+      "subject": "Język angielski",
+      "nr": 111,
+      "days": [
+        "Pn",
+        "Śr",
+        "Czw",
+        "Pt"
+      ],
+      "spec": false,
+      "period_id": 7
+    },
+    {
+      "subject": "Język angielski",
+      "nr": 211,
+      "days": [
+        "Pn",
+        "Śr",
+        "Czw",
+        "Pt"
+      ],
+      "spec": true,
+      "period_id": 7
+    },
+    {
+      "subject": "Język francuski",
+      "nr": 101,
+      "days": [
+        "Pn",
+        "Śr",
+        "Czw",
+        "Pt"
+      ],
+      "spec": false,
+      "period_id": 7
+    },
+    {
+      "subject": "Język hiszpański",
+      "nr": 103,
+      "days": [
+        "Pn",
+        "Śr",
+        "Czw",
+        "Pt"
+      ],
+      "spec": false,
+      "period_id": 7
+    },
+    {
+      "subject": "Język niemiecki",
+      "nr": 208,
+      "days": [
+        "Pn",
+        "Śr",
+        "Czw",
+        "Pt"
+      ],
+      "spec": true,
+      "period_id": 7
+    },
+    {
+      "subject": "Język polski",
+      "nr": 107,
+      "days": [
+        "Pn",
+        "Śr",
+        "Czw",
+        "Pt"
+      ],
+      "spec": false,
+      "period_id": 7
+    },
+    {
+      "subject": "Język polski",
+      "nr": 204,
+      "days": [
+        "Pn",
+        "Śr",
+        "Czw",
+        "Pt"
+      ],
+      "spec": true,
+      "period_id": 7
+    },
+    {
+      "subject": "Matematyka",
+      "nr": 101,
+      "days": [
+        "Pn",
+        "Śr",
+        "Czw",
+        "Pt"
+      ],
+      "spec": false,
+      "period_id": 7
+    },
+    {
+      "subject": "Matematyka",
+      "nr": 104,
+      "days": [
+        "Pn",
+        "Śr",
+        "Czw",
+        "Pt"
+      ],
+      "spec": false,
+      "period_id": 7
+    },
+    {
+      "subject": "Matematyka",
+      "nr": 104,
+      "days": [
+        "Pn",
+        "Śr",
+        "Czw",
+        "Pt"
+      ],
+      "spec": false,
+      "period_id": 7
+    },
+    {
+      "subject": "Religia",
+      "nr": 107,
+      "days": [
+        "Pn"
+      ],
+      "spec": false,
+      "period_id": 7
+    },
+    {
+      "subject": "Wychowanie fizyczne",
+      "nr": 101,
+      "days": [
+        "Pn",
+        "Śr"
+      ],
+      "spec": false,
+      "period_id": 7
+    },
+    {
+      "subject": "Wychowanie fizyczne",
+      "nr": 104,
+      "days": [
+        "Pn",
+        "Śr"
+      ],
+      "spec": false,
+      "period_id": 7
+    },
+    {
+      "subject": "Wychowanie fizyczne",
+      "nr": 107,
+      "days": [
+        "Czw",
+        "Pt"
+      ],
+      "spec": false,
+      "period_id": 7
+    },
+    {
+      "subject": "Edukacja artystyczna",
+      "nr": 207,
+      "days": [
+        "Śr"
+      ],
+      "spec": true,
+      "period_id": 8
+    },
+    {
+      "subject": "Edukacja artystyczna",
+      "nr": 207,
+      "days": [
+        "Śr"
+      ],
+      "spec": true,
+      "period_id": 9
+    }
+  ]
