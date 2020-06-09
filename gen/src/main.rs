@@ -21,6 +21,8 @@ const c_parents: i64 = 300 + c_students;
 const c_iter_size: i64 = 1000;
 const c_group_period: i64 = 50;
 
+mod subjects;
+
 #[derive(Debug, Deserialize)]
 struct User {
     pub id: i64,
@@ -228,4 +230,5 @@ fn gen_user_groups() {
 fn main() {
     gen_users();
     gen_user_groups();
+    subjects::gen_subjects();
 }

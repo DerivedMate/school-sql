@@ -1,0 +1,82 @@
+[
+  {
+    "id": 0,
+    "name": "accounting & finance",
+    "short": "acc.fin"
+  },
+  {
+    "id": 1,
+    "name": "architecture",
+    "short": "arc"
+  },
+  {
+    "id": 2,
+    "name": "english",
+    "short": "eng"
+  },
+  {
+    "id": 3,
+    "name": "latin",
+    "short": "lat"
+  },
+  {
+    "id": 4,
+    "name": "spanish",
+    "short": "spa"
+  },
+  {
+    "id": 5,
+    "name": "mechanical engineering",
+    "short": "mec.eng"
+  },
+  {
+    "id": 6,
+    "name": "law",
+    "short": "law"
+  },
+  {
+    "id": 7,
+    "name": "economics",
+    "short": "eco"
+  },
+  {
+    "id": 8,
+    "name": "chemistry",
+    "short": "che"
+  },
+  {
+    "id": 9,
+    "name": "biology",
+    "short": "bio"
+  },
+  {
+    "id": 10,
+    "name": "business",
+    "short": "bus"
+  },
+  {
+    "id": 11,
+    "name": "computer science",
+    "short": "com.sci"
+  },
+  {
+    "id": 12,
+    "name": "engineering",
+    "short": "eng"
+  },
+  {
+    "id": 13,
+    "name": "physics",
+    "short": "phy"
+  },
+  {
+    "id": 14,
+    "name": "physical education",
+    "short": "phy.edu"
+  },
+  {
+    "id": 15,
+    "name": "religious studies",
+    "short": "rel.stu"
+  }
+]
