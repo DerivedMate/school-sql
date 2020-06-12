@@ -1,1 +1,1 @@
-cargo run --release > out/user.tsv
+cargo run --release > out/user.csv

@@ -20,15 +20,28 @@ pub fn read_subjects() -> Vec<Subject> {
     serde_json::from_reader(reader).unwrap()
 }
 
+pub fn gen_subjects() {
+    let fh = read_subjects();
+    let mut o_subjects = File::create("out/subject.csv").unwrap();
+
+    o_subjects.write(b"id;name;name_short\n").unwrap();
+    
+    for sub in fh.iter() {
+        o_subjects
+            .write(format!("{};{};{}\n", sub.id, sub.name, sub.short).as_bytes())
+            .unwrap();
+    }
+}
+
 pub fn gen_courses() {
     let fh = read_subjects();
-    let mut o_courses = File::create("out/course.tsv").unwrap();
-    let mut o_course_req = File::create("out/course_req.tsv").unwrap();
+    let mut o_courses = File::create("out/course.csv").unwrap();
+    let mut o_course_req = File::create("out/course_req.csv").unwrap();
 
     let mut last_req_id = 0;
 
-    o_courses.write(b"id	subject_id	nr	spec	hours\n").unwrap();
-    o_course_req.write(b"id	course_id	required_id\n").unwrap();
+    o_courses.write(b"id;subject_id;nr;spec;hours\n").unwrap();
+    o_course_req.write(b"id;course_id;required_id\n").unwrap();
     for sub in fh.iter() {
         for i in c_course_range[0]..c_course_range[1] {
             let iter_id = sub.id * c_course_range_size * 2;
@@ -46,11 +59,11 @@ pub fn gen_courses() {
             // Add all requirements explicitly
             // Insert base
             o_courses
-                .write(format!("{}	{}	{}	{}	{}\n", id_base, sub_id, nr_base, 0, hours).as_bytes())
+                .write(format!("{};{};{};{};{}\n", id_base, sub_id, nr_base, 0, hours).as_bytes())
                 .unwrap();
             // Insert spec
             o_courses
-                .write(format!("{}	{}	{}	{}	{}\n", id_spec, sub_id, nr_spec, 1, hours).as_bytes())
+                .write(format!("{};{};{};{};{}\n", id_spec, sub_id, nr_spec, 1, hours).as_bytes())
                 .unwrap();
 
             // Insert requirements
@@ -60,13 +73,13 @@ pub fn gen_courses() {
                     break;
                 }
                 o_course_req
-                    .write(format!("{}	{}	{}\n", last_req_id, id_spec, id_req).as_bytes())
+                    .write(format!("{};{};{}\n", last_req_id, id_spec, id_req).as_bytes())
                     .unwrap();
                 last_req_id += 1;
 
                 if j % 2 == 0 && id_req != id_base {
                     o_course_req
-                        .write(format!("{}	{}	{}\n", last_req_id, id_base, iter_id + j).as_bytes())
+                        .write(format!("{};{};{}\n", last_req_id, id_base, iter_id + j).as_bytes())
                         .unwrap();
                     last_req_id += 1;
                 }

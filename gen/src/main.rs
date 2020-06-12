@@ -80,7 +80,7 @@ fn gen_users() {
         .collect();
 
     let m = last_names.len();
-    println!("id	name	last_name	email	phone_number	login	password");
+    println!("id;name;last_name;email;phone_number;login;password");
 
     for (i, n) in names.iter().enumerate() {
         for (j, l) in last_names.iter().enumerate() {
@@ -91,7 +91,7 @@ fn gen_users() {
             let password = gen_password(&n, &l);
 
             println!(
-                "{}	{}	{}	{}	{}	{}	{}",
+                "{};{};{};{};{};{};{}",
                 id, n, l, email, phone_number, login, password,
             );
         }
@@ -103,7 +103,7 @@ fn gen_teacher(user: &User, j: i64, iter: i64, head: bool) -> String {
     let title = titles[(j % titles.len() as i64) as usize];
 
     format!(
-        "{}	{}	{}	{}\n",
+        "{};{};{};{}\n",
         iter * c_teachers + j,
         user.id,
         title,
@@ -139,7 +139,7 @@ fn gen_group(j: i64, iter: i64) -> String {
     let teacher_id = iter * (c_iter_size / c_group_period) + j / c_group_period; // iter * c_teachers + j / (iter+1);
     let name = make_group_name(id);// roman::Roman::from(id % c_group_period as i16 + 1);
     let start_year = year_0 + id / c_group_period as i16;
-    format!("{}	{}	{}	{}\n", id, teacher_id, name, start_year)
+    format!("{};{};{};{}\n", id, teacher_id, name, start_year)
 }
 
 fn gen_student(j: i64, iter: i64) -> String {
@@ -147,7 +147,7 @@ fn gen_student(j: i64, iter: i64) -> String {
     let user_id = iter * (c_students - c_teachers) + j;
     let group_id = iter * c_group_period + j/c_group_period - 2;// group_id_of_index(j - c_parents, iter);
 
-    format!("{}	{}	{}\n", id, user_id, group_id)
+    format!("{};{};{}\n", id, user_id, group_id)
 }
 
 fn parent_id_of_index(j: i64, iter: i64) -> i64 {
@@ -157,7 +157,7 @@ fn gen_parent(j: i64, iter: i64) -> String {
     let id = parent_id_of_index(j, iter);
     let user_id = j;
 
-    format!("{}	{}\n", id, user_id)
+    format!("{};{}\n", id, user_id)
 }
 
 fn gen_parenthood(j: i64, iter: i64) -> String {
@@ -166,7 +166,7 @@ fn gen_parenthood(j: i64, iter: i64) -> String {
     let k = id_ * (c_students - c_teachers) / (c_parents - c_students);
     let id = k;
     format!(
-        "{}	{}	{}\n{}	{}	{}\n",
+        "{};{};{}\n{};{};{}\n",
         id,
         parent_id,
         k,
@@ -179,23 +179,23 @@ fn gen_parenthood(j: i64, iter: i64) -> String {
 fn gen_user_groups() {
     let mut rng = rand::thread_rng();
     // output files
-    let mut o_students = File::create("out/student.tsv").unwrap();
-    let mut o_teachers = File::create("out/teacher.tsv").unwrap();
-    let mut o_parent = File::create("out/parent.tsv").unwrap();
-    let mut o_parenthood = File::create("out/parenthood.tsv").unwrap();
-    let mut o_group = File::create("out/group.tsv").unwrap();
+    let mut o_students = File::create("out/student.csv").unwrap();
+    let mut o_teachers = File::create("out/teacher.csv").unwrap();
+    let mut o_parent = File::create("out/parent.csv").unwrap();
+    let mut o_parenthood = File::create("out/parenthood.csv").unwrap();
+    let mut o_group = File::create("out/group.csv").unwrap();
     // input
     let mut rdr = csv::ReaderBuilder::new()
-        .delimiter(b'\t')
-        .from_path("out/user.tsv")
+        .delimiter(b';')
+        .from_path("out/user.csv")
         .unwrap();
 
     // print headers
-    o_students.write(b"id	user_id	group_id\n").unwrap();
-    o_teachers.write(b"id	user_id	title	is_head\n").unwrap();
-    o_parent.write(b"id	user_id\n").unwrap();
-    o_parenthood.write(b"id	parent_id	student_id\n").unwrap();
-    o_group.write(b"id	teacher_id	name	start_year\n").unwrap();
+    o_students.write(b"id;user_id;group_id\n").unwrap();
+    o_teachers.write(b"id;user_id;title;is_head\n").unwrap();
+    o_parent.write(b"id;user_id\n").unwrap();
+    o_parenthood.write(b"id;parent_id;student_id\n").unwrap();
+    o_group.write(b"id;teacher_id;name;start_year\n").unwrap();
 
     for (i, r_u) in rdr.deserialize().enumerate() {
         let i = i as i64;
@@ -231,5 +231,6 @@ fn gen_user_groups() {
 fn main() {
     gen_users();
     gen_user_groups();
+    subjects::gen_subjects();
     subjects::gen_courses(); 
 }
