@@ -22,6 +22,7 @@ const c_iter_size: i64 = 1000;
 const c_group_period: i64 = 50;
 
 mod subjects;
+mod plan;
 
 #[derive(Debug, Deserialize)]
 struct User {
@@ -184,6 +185,7 @@ fn gen_user_groups() {
     let mut o_parent = File::create("out/parent.csv").unwrap();
     let mut o_parenthood = File::create("out/parenthood.csv").unwrap();
     let mut o_group = File::create("out/group.csv").unwrap();
+    
     // input
     let mut rdr = csv::ReaderBuilder::new()
         .delimiter(b';')
@@ -229,8 +231,12 @@ fn gen_user_groups() {
 }
 
 fn main() {
-    gen_users();
-    gen_user_groups();
     subjects::gen_subjects();
     subjects::gen_courses(); 
+
+    gen_users();
+    gen_user_groups();
+
+    plan::gen_trimesters();
+    plan::gen_periods();
 }

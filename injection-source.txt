@@ -1,6 +1,11 @@
-gen/out/group.tsv
-gen/out/parenthood.tsv
-gen/out/parent.tsv
-gen/out/student.tsv
-gen/out/teacher.tsv
-gen/out/user.tsv
+gen/out/course.csv
+gen/out/course_req.csv
+gen/out/group.csv
+gen/out/major_arche.csv
+gen/out/major_req.csv
+gen/out/parent.csv
+gen/out/parenthood.csv
+gen/out/student.csv
+gen/out/subject.csv
+gen/out/teacher.csv
+gen/out/user.csv

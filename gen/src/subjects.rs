@@ -25,7 +25,6 @@ pub fn gen_subjects() {
     let mut o_subjects = File::create("out/subject.csv").unwrap();
 
     o_subjects.write(b"id;name;name_short\n").unwrap();
-    
     for sub in fh.iter() {
         o_subjects
             .write(format!("{};{};{}\n", sub.id, sub.name, sub.short).as_bytes())
@@ -37,12 +36,40 @@ pub fn gen_courses() {
     let fh = read_subjects();
     let mut o_courses = File::create("out/course.csv").unwrap();
     let mut o_course_req = File::create("out/course_req.csv").unwrap();
+    let mut o_major_arches = File::create("out/major_arche.csv").unwrap();
+    let mut o_major_req = File::create("out/major_req.csv").unwrap();
 
     let mut last_req_id = 0;
+    let mut last_major_req_id = 0;
 
+    // Insert headers
     o_courses.write(b"id;subject_id;nr;spec;hours\n").unwrap();
     o_course_req.write(b"id;course_id;required_id\n").unwrap();
-    for sub in fh.iter() {
+    o_major_arches
+        .write(b"id;name;subject_id;courses_req\n")
+        .unwrap();
+    o_major_req.write(b"id;arche_id;course_id\n").unwrap();
+
+    for sub in fh.into_iter() {
+        // Insert major arches
+        let id_major_arche = sub.id;
+        let name_major_arche = format!("{} major", &sub.name);
+        let nr_courses_req = match sub.short.as_str() {
+            "eng" | "lat" | "spa" => 9,
+            _ => 0,
+        };
+
+        o_major_arches
+            .write(
+                format!(
+                    "{};{};{};{}\n",
+                    id_major_arche, name_major_arche, sub.id, nr_courses_req
+                )
+                .as_bytes(),
+            )
+            .unwrap();
+
+        // Insert courses
         for i in c_course_range[0]..c_course_range[1] {
             let iter_id = sub.id * c_course_range_size * 2;
             let id_base = iter_id + i * 2;
@@ -65,6 +92,16 @@ pub fn gen_courses() {
             o_courses
                 .write(format!("{};{};{};{};{}\n", id_spec, sub_id, nr_spec, 1, hours).as_bytes())
                 .unwrap();
+            if nr_courses_req == 0 {
+                o_major_req
+                    .write(
+                        format!("{};{};{}\n", last_major_req_id, id_major_arche, id_spec)
+                            .as_bytes(),
+                    )
+                    .unwrap();
+
+                last_major_req_id += 1;
+            }
 
             // Insert requirements
             for j in 0..=(i * 2) {
