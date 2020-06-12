@@ -162,8 +162,9 @@ fn gen_parent(j: i64, iter: i64) -> String {
 
 fn gen_parenthood(j: i64, iter: i64) -> String {
     let parent_id = parent_id_of_index(j, iter);
-    let id = iter * (c_parents - c_students) + j - c_students;
-    let k = id * (c_students - c_teachers) / (c_parents - c_students);
+    let id_ = iter * (c_parents - c_students) + j - c_students;
+    let k = id_ * (c_students - c_teachers) / (c_parents - c_students);
+    let id = k;
     format!(
         "{}	{}	{}\n{}	{}	{}\n",
         id,
@@ -230,5 +231,5 @@ fn gen_user_groups() {
 fn main() {
     gen_users();
     gen_user_groups();
-    subjects::gen_subjects();
+    subjects::gen_courses(); 
 }

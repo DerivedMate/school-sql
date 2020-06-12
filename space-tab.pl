@@ -24,7 +24,7 @@ foreach my $f (@files) {
     open (my $outh, ">", $f_out_full) or die $!;
 
     foreach my $l (<$fh>) {
-        $l =~ s/\s+/\t/g;
+        $l =~ s/\t+/;/g;
         $l = trim $l;
         print {$outh} "$l\n";
     }
