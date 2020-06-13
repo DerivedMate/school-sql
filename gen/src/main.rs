@@ -22,6 +22,8 @@ const c_iter_size: i64 = 1000;
 const c_group_period: i64 = 50;
 const c_max_course_id: i64 = 285;
 const c_max_classroom: i64 = 52;
+const c_grades_per_lesson: i64 = 5;
+const c_grade_max_step: i64 = 5;
 
 mod plan;
 mod subjects;
@@ -197,6 +199,8 @@ fn gen_user_groups() {
     let mut o_classes = File::create("out/class.csv").unwrap();
     let mut o_excuses = File::create("out/excuse.csv").unwrap();
     let mut o_substitutions = File::create("out/substitution.csv").unwrap();
+    let mut o_grade_arches = File::create("out/grade_arche.csv").unwrap();
+    let mut o_grades = File::create("out/grade.csv").unwrap();
 
     // Last ids
     let mut last_lesson_id = 0;
@@ -204,6 +208,8 @@ fn gen_user_groups() {
     let mut last_reg_id = 0;
     let mut last_excuse_id = 0;
     let mut last_substitution_id = 0;
+    let mut last_grade_arche_id = 0;
+    let mut last_grade_id = 0;
 
     // input
     let mut rdr = csv::ReaderBuilder::new()
@@ -228,7 +234,13 @@ fn gen_user_groups() {
         .write(b"id;student_id;lesson_id;date;attendance\n")
         .unwrap();
     o_excuses.write(b"id;excuser_id;class_id\n").unwrap();
-    o_substitutions.write(b"id;teacher_id;class_id;classroom\n").unwrap();
+    o_substitutions
+        .write(b"id;teacher_id;class_id;classroom\n")
+        .unwrap();
+    o_grade_arches.write(b"id;lesson_id;name;max\n").unwrap();
+    o_grades
+        .write(b"id;arche_id;teacher_id;student_id;points;date\n")
+        .unwrap();
 
     for (i, r_u) in rdr.deserialize().enumerate() {
         let i = i as i64;
@@ -249,16 +261,32 @@ fn gen_user_groups() {
                 let color = hsl_ish::Rgb::from(color);
                 let color = hex::encode(vec![color.r, color.g, color.b]);
                 let classroom = (rng.gen::<f64>() * c_max_classroom as f64) as i64 + 1;
+                let lesson_id = last_lesson_id;
                 o_lessons
                     .write(
                         format!(
                             "{};{};{};{};{};{}\n",
-                            last_lesson_id, course_id, teacher_id, trimester_id, classroom, color
+                            lesson_id, course_id, teacher_id, trimester_id, classroom, color
                         )
                         .as_bytes(),
                     )
                     .unwrap();
 
+                // Insert grade arches
+                for grade_nr in 0..c_grades_per_lesson {
+                    let max = (grade_nr + 1) * c_grade_max_step;
+                    let name = format!("grade {}", grade_nr);
+
+                    o_grade_arches
+                        .write(
+                            format!("{};{};{};{}\n", last_grade_arche_id, lesson_id, name, max)
+                                .as_bytes(),
+                        )
+                        .unwrap();
+                    last_grade_arche_id += 1;
+                }
+
+                // Insert the lesson into the time table
                 let p = ((plan::c_max_period_id - 1) as f64 * rng.gen::<f64>()) as i64;
                 for week_day in 0..=4 {
                     let period_id = if week_day == 1 { p + 1 } else { p };
@@ -307,12 +335,13 @@ fn gen_user_groups() {
                             format!(
                                 "{};{};{}\n",
                                 last_excuse_id,
-                                j - (c_students - c_teachers),
+                                j + (c_students - c_teachers),
                                 class_id
                             )
                             .as_bytes(),
                         )
                         .unwrap();
+                    last_excuse_id += 1;
                 }
 
                 if rng.gen::<f64>() > 0.9 {
@@ -321,11 +350,36 @@ fn gen_user_groups() {
 
                     o_substitutions
                         .write(
-                            format!("{};{};{};{}\n", last_substitution_id, teacher_id, class_id, new_classroom)
-                                .as_bytes(),
+                            format!(
+                                "{};{};{};{}\n",
+                                last_substitution_id, teacher_id, class_id, new_classroom
+                            )
+                            .as_bytes(),
                         )
                         .unwrap();
                     last_substitution_id += 1;
+                }
+
+                // Insert grades
+                for d_grade_id in 0..c_grades_per_lesson {
+                    let arche_id = last_grade_arche_id - d_grade_id;
+                    let grade_id = last_grade_id;
+                    let teacher_id = j + (c_students - c_teachers);
+                    let max = (c_grades_per_lesson + 1 - d_grade_id) * c_grade_max_step;
+                    let points = (rng.gen::<f64>() * max as f64) as i64;
+                    let date = "2020-09-04";
+
+                    o_grades
+                        .write(
+                            format!(
+                                "{};{};{};{};{};{}\n",
+                                grade_id, arche_id, teacher_id, student_id, points, date
+                            )
+                            .as_bytes(),
+                        )
+                        .unwrap();
+
+                    last_grade_id += 1;
                 }
 
                 last_reg_id += 1;
