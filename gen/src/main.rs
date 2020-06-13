@@ -3,9 +3,9 @@ extern crate serde_json;
 #[macro_use]
 extern crate serde;
 extern crate csv;
-extern crate numerals;
+extern crate hex;
+extern crate hsl_ish;
 
-use numerals::roman;
 use rand::prelude::*;
 use serde::{Deserialize, Serialize};
 use serde_json::Result;
@@ -20,9 +20,10 @@ const c_students: i64 = 600 + c_teachers;
 const c_parents: i64 = 300 + c_students;
 const c_iter_size: i64 = 1000;
 const c_group_period: i64 = 50;
+const c_max_course_id: i64 = 285;
 
-mod subjects;
 mod plan;
+mod subjects;
 
 #[derive(Debug, Deserialize)]
 struct User {
@@ -121,14 +122,15 @@ fn make_group_name(id: i16) -> String {
     let mut j = (id % c_group_period as i16) as usize;
 
     loop {
-        out.push(ASCII_UPPER[j%n]);
+        out.push(ASCII_UPPER[j % n]);
         j /= n;
         if j <= 0 {
             break;
         }
-    } 
+    }
 
-    out.iter().fold(String::new(), |acc, c| c.to_string() + &acc)
+    out.iter()
+        .fold(String::new(), |acc, c| c.to_string() + &acc)
 }
 
 fn group_id_of_index(j: i64, iter: i64) -> i64 {
@@ -138,7 +140,7 @@ fn gen_group(j: i64, iter: i64) -> String {
     let year_0 = 2020;
     let id = group_id_of_index(j, iter) as i16;
     let teacher_id = iter * (c_iter_size / c_group_period) + j / c_group_period; // iter * c_teachers + j / (iter+1);
-    let name = make_group_name(id);// roman::Roman::from(id % c_group_period as i16 + 1);
+    let name = make_group_name(id); // roman::Roman::from(id % c_group_period as i16 + 1);
     let start_year = year_0 + id / c_group_period as i16;
     format!("{};{};{};{}\n", id, teacher_id, name, start_year)
 }
@@ -146,7 +148,7 @@ fn gen_group(j: i64, iter: i64) -> String {
 fn gen_student(j: i64, iter: i64) -> String {
     let id = iter * (c_students - c_teachers) + j - c_teachers;
     let user_id = iter * (c_students - c_teachers) + j;
-    let group_id = iter * c_group_period + j/c_group_period - 2;// group_id_of_index(j - c_parents, iter);
+    let group_id = iter * c_group_period + j / c_group_period - 2; // group_id_of_index(j - c_parents, iter);
 
     format!("{};{};{}\n", id, user_id, group_id)
 }
@@ -185,7 +187,11 @@ fn gen_user_groups() {
     let mut o_parent = File::create("out/parent.csv").unwrap();
     let mut o_parenthood = File::create("out/parenthood.csv").unwrap();
     let mut o_group = File::create("out/group.csv").unwrap();
-    
+    let mut o_lessons = File::create("out/lesson.csv").unwrap();
+    let mut o_cells = File::create("out/cell.csv").unwrap();
+    let mut last_lesson_id = 0;
+    let mut last_cell_id = 0;
+
     // input
     let mut rdr = csv::ReaderBuilder::new()
         .delimiter(b';')
@@ -198,6 +204,10 @@ fn gen_user_groups() {
     o_parent.write(b"id;user_id\n").unwrap();
     o_parenthood.write(b"id;parent_id;student_id\n").unwrap();
     o_group.write(b"id;teacher_id;name;start_year\n").unwrap();
+    o_lessons
+        .write(b"id;course_id;teacher_id;trimester_id;color\n")
+        .unwrap();
+    o_cells.write(b"id;period_id;lesson_id;week_day\n").unwrap();
 
     for (i, r_u) in rdr.deserialize().enumerate() {
         let i = i as i64;
@@ -206,9 +216,48 @@ fn gen_user_groups() {
         let u: User = r_u.unwrap();
 
         if j < c_teachers {
+            let is_head = j % 373 == 0 && iter % 1000 == 0;
             o_teachers
-                .write(gen_teacher(&u, j, iter, j % 373 == 0 && iter % 1000 == 0).as_bytes())
+                .write(gen_teacher(&u, j, iter, is_head).as_bytes())
                 .unwrap();
+            // Generate the teacher's lessons
+            let teacher_id = iter * c_teachers + j;
+            for trimester_id in (plan::c_max_trimester_id - 3)..=plan::c_max_trimester_id {
+                let course_id = teacher_id % c_max_course_id;
+                let color = hsl_ish::Hsl::new(rng.gen::<f64>() * 360., 0.7, 0.5);
+                let color = hsl_ish::Rgb::from(color);
+                let color = hex::encode(vec![color.r, color.g, color.b]);
+                o_lessons
+                    .write(
+                        format!(
+                            "{};{};{};{};{}\n",
+                            last_lesson_id, course_id, teacher_id, trimester_id, color
+                        )
+                        .as_bytes(),
+                    )
+                    .unwrap();
+
+                for p in 0..=plan::c_max_period_id {
+                    if rng.gen::<f64>() < 0.9 {
+                        continue;
+                    }
+
+                    for week_day in 0..=4 {
+                        let period_id = if week_day == 1 { p + 1 } else { p };
+                        o_cells
+                            .write(
+                                format!(
+                                    "{};{};{};{}\n",
+                                    last_cell_id, period_id, last_lesson_id, week_day
+                                )
+                                .as_bytes(),
+                            )
+                            .unwrap();
+                        last_cell_id += 1;
+                    }
+                }
+                last_lesson_id += 1;
+            }
         } else if j < c_students {
             o_students.write(gen_student(j, iter).as_bytes()).unwrap();
         } else if j < c_parents {
@@ -232,7 +281,7 @@ fn gen_user_groups() {
 
 fn main() {
     subjects::gen_subjects();
-    subjects::gen_courses(); 
+    subjects::gen_courses();
 
     gen_users();
     gen_user_groups();

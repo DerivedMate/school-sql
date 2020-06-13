@@ -3,6 +3,15 @@ use proyecto;
 set global local_infile = True;
 
 
+create table if not exists `cell` (
+	id int primary key,
+	period_id int not null,
+	lesson_id int not null,
+	week_day int
+);
+load data local infile 'gen/out/cell.csv' into table `cell` fields terminated by ';' ignore 1 lines;
+
+
 create table if not exists `course` (
 	id int primary key,
 	subject_id int not null,
@@ -28,6 +37,16 @@ create table if not exists `group` (
 	start_year int
 );
 load data local infile 'gen/out/group.csv' into table `group` fields terminated by ';' ignore 1 lines;
+
+
+create table if not exists `lesson` (
+	id int primary key,
+	course_id int not null,
+	teacher_id int not null,
+	trimester_id int not null,
+	color char(6)
+);
+load data local infile 'gen/out/lesson.csv' into table `lesson` fields terminated by ';' ignore 1 lines;
 
 
 create table if not exists `major_arche` (
@@ -62,6 +81,14 @@ create table if not exists `parenthood` (
 load data local infile 'gen/out/parenthood.csv' into table `parenthood` fields terminated by ';' ignore 1 lines;
 
 
+create table if not exists `period` (
+	id int primary key,
+	from time,
+	to time
+);
+load data local infile 'gen/out/period.csv' into table `period` fields terminated by ';' ignore 1 lines;
+
+
 create table if not exists `student` (
 	id int primary key,
 	user_id int not null,
@@ -85,6 +112,13 @@ create table if not exists `teacher` (
 	is_head tinyint
 );
 load data local infile 'gen/out/teacher.csv' into table `teacher` fields terminated by ';' ignore 1 lines;
+
+
+create table if not exists `trimester` (
+	id int primary key,
+	start_date date
+);
+load data local infile 'gen/out/trimester.csv' into table `trimester` fields terminated by ';' ignore 1 lines;
 
 
 create table if not exists `user` (

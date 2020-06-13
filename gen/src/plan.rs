@@ -8,8 +8,10 @@ pub struct Period {
     pub to: String,
 }
 
-const c_last_year: i64 = 2419;
-const c_first_year: i64 = 2020;
+pub const c_last_year: i64 = 2419;
+pub const c_first_year: i64 = 2020;
+pub const c_max_period_id: i64 = 9;
+pub const c_max_trimester_id: i64 = 1199;
 
 fn read_periods() -> Vec<Period> {
     let file = File::open("./data/periods.json").unwrap();

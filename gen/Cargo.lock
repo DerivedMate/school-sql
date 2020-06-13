@@ -51,7 +51,8 @@ name = "gen"
 version = "0.1.0"
 dependencies = [
  "csv",
- "numerals",
+ "hex",
+ "hsl-ish",
  "rand",
  "serde",
  "serde_json",
@@ -67,6 +68,18 @@ dependencies = [
  "libc",
  "wasi",
 ]
+
+[[package]]
+name = "hex"
+version = "0.4.2"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "644f9158b2f133fd50f5fb3242878846d9eb792e445c893805ff0e3824006e35"
+
+[[package]]
+name = "hsl-ish"
+version = "0.1.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "cbed7e51d12e43d324848e5e928251d9eb7c94ab5af752544afdce163405796c"
 
 [[package]]
 name = "itoa"
@@ -91,12 +104,6 @@ name = "memchr"
 version = "2.3.3"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "3728d817d99e5ac407411fa471ff9800a778d88a24685968b36824eaf4bee400"
-
-[[package]]
-name = "numerals"
-version = "0.1.4"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "e25be21376a772d15f97ae789845340a9651d3c4246ff5ebb6a2b35f9c37bd31"
 
 [[package]]
 name = "ppv-lite86"
