@@ -43,7 +43,9 @@ pub fn gen_courses() {
     let mut last_major_req_id = 0;
 
     // Insert headers
-    o_courses.write(b"id;subject_id;nr;spec;hours\n").unwrap();
+    o_courses
+        .write(b"id;subject_id;nr;spec;hours;slots\n")
+        .unwrap();
     o_course_req.write(b"id;course_id;required_id\n").unwrap();
     o_major_arches
         .write(b"id;name;subject_id;courses_req\n")
@@ -77,6 +79,7 @@ pub fn gen_courses() {
             let sub_id = sub.id;
             let nr_spec = 200 + i;
             let nr_base = 100 + i;
+            let slots = 50;
             let hours = match sub.short.as_str() {
                 "reg.stu" => 24,
                 "phy.edu" => 36,
@@ -86,11 +89,23 @@ pub fn gen_courses() {
             // Add all requirements explicitly
             // Insert base
             o_courses
-                .write(format!("{};{};{};{};{}\n", id_base, sub_id, nr_base, 0, hours).as_bytes())
+                .write(
+                    format!(
+                        "{};{};{};{};{};{}\n",
+                        id_base, sub_id, nr_base, 0, hours, slots
+                    )
+                    .as_bytes(),
+                )
                 .unwrap();
             // Insert spec
             o_courses
-                .write(format!("{};{};{};{};{}\n", id_spec, sub_id, nr_spec, 1, hours).as_bytes())
+                .write(
+                    format!(
+                        "{};{};{};{};{};{}\n",
+                        id_spec, sub_id, nr_spec, 1, hours, slots
+                    )
+                    .as_bytes(),
+                )
                 .unwrap();
             if nr_courses_req == 0 {
                 o_major_req

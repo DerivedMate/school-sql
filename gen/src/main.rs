@@ -21,6 +21,7 @@ const c_parents: i64 = 300 + c_students;
 const c_iter_size: i64 = 1000;
 const c_group_period: i64 = 50;
 const c_max_course_id: i64 = 285;
+const c_max_classroom: i64 = 52;
 
 mod plan;
 mod subjects;
@@ -145,8 +146,11 @@ fn gen_group(j: i64, iter: i64) -> String {
     format!("{};{};{};{}\n", id, teacher_id, name, start_year)
 }
 
+fn student_id(j: i64, iter: i64) -> i64 {
+    iter * (c_students - c_teachers) + j - c_teachers
+}
 fn gen_student(j: i64, iter: i64) -> String {
-    let id = iter * (c_students - c_teachers) + j - c_teachers;
+    let id = student_id(j, iter);
     let user_id = iter * (c_students - c_teachers) + j;
     let group_id = iter * c_group_period + j / c_group_period - 2; // group_id_of_index(j - c_parents, iter);
 
@@ -189,8 +193,17 @@ fn gen_user_groups() {
     let mut o_group = File::create("out/group.csv").unwrap();
     let mut o_lessons = File::create("out/lesson.csv").unwrap();
     let mut o_cells = File::create("out/cell.csv").unwrap();
+    let mut o_registrations = File::create("out/registration.csv").unwrap();
+    let mut o_classes = File::create("out/class.csv").unwrap();
+    let mut o_excuses = File::create("out/excuse.csv").unwrap();
+    let mut o_substitutions = File::create("out/substitution.csv").unwrap();
+
+    // Last ids
     let mut last_lesson_id = 0;
     let mut last_cell_id = 0;
+    let mut last_reg_id = 0;
+    let mut last_excuse_id = 0;
+    let mut last_substitution_id = 0;
 
     // input
     let mut rdr = csv::ReaderBuilder::new()
@@ -205,9 +218,17 @@ fn gen_user_groups() {
     o_parenthood.write(b"id;parent_id;student_id\n").unwrap();
     o_group.write(b"id;teacher_id;name;start_year\n").unwrap();
     o_lessons
-        .write(b"id;course_id;teacher_id;trimester_id;color\n")
+        .write(b"id;course_id;teacher_id;trimester_id;classroom;color\n")
         .unwrap();
     o_cells.write(b"id;period_id;lesson_id;week_day\n").unwrap();
+    o_registrations
+        .write(b"id;lesson_id;student_id;time\n")
+        .unwrap();
+    o_classes
+        .write(b"id;student_id;lesson_id;date;attendance\n")
+        .unwrap();
+    o_excuses.write(b"id;excuser_id;class_id\n").unwrap();
+    o_substitutions.write(b"id;teacher_id;class_id;classroom\n").unwrap();
 
     for (i, r_u) in rdr.deserialize().enumerate() {
         let i = i as i64;
@@ -222,44 +243,93 @@ fn gen_user_groups() {
                 .unwrap();
             // Generate the teacher's lessons
             let teacher_id = iter * c_teachers + j;
-            for trimester_id in (plan::c_max_trimester_id - 3)..=plan::c_max_trimester_id {
+            for trimester_id in (plan::c_max_trimester_id - 5)..=plan::c_max_trimester_id {
                 let course_id = teacher_id % c_max_course_id;
                 let color = hsl_ish::Hsl::new(rng.gen::<f64>() * 360., 0.7, 0.5);
                 let color = hsl_ish::Rgb::from(color);
                 let color = hex::encode(vec![color.r, color.g, color.b]);
+                let classroom = (rng.gen::<f64>() * c_max_classroom as f64) as i64 + 1;
                 o_lessons
                     .write(
                         format!(
-                            "{};{};{};{};{}\n",
-                            last_lesson_id, course_id, teacher_id, trimester_id, color
+                            "{};{};{};{};{};{}\n",
+                            last_lesson_id, course_id, teacher_id, trimester_id, classroom, color
                         )
                         .as_bytes(),
                     )
                     .unwrap();
 
-                for p in 0..=plan::c_max_period_id {
-                    if rng.gen::<f64>() < 0.9 {
-                        continue;
-                    }
-
-                    for week_day in 0..=4 {
-                        let period_id = if week_day == 1 { p + 1 } else { p };
-                        o_cells
-                            .write(
-                                format!(
-                                    "{};{};{};{}\n",
-                                    last_cell_id, period_id, last_lesson_id, week_day
-                                )
-                                .as_bytes(),
+                let p = ((plan::c_max_period_id - 1) as f64 * rng.gen::<f64>()) as i64;
+                for week_day in 0..=4 {
+                    let period_id = if week_day == 1 { p + 1 } else { p };
+                    o_cells
+                        .write(
+                            format!(
+                                "{};{};{};{}\n",
+                                last_cell_id, period_id, last_lesson_id, week_day
                             )
-                            .unwrap();
-                        last_cell_id += 1;
-                    }
+                            .as_bytes(),
+                        )
+                        .unwrap();
+                    last_cell_id += 1;
                 }
                 last_lesson_id += 1;
             }
         } else if j < c_students {
             o_students.write(gen_student(j, iter).as_bytes()).unwrap();
+            for d_lesson_id in 0..=7 {
+                let lesson_id = last_lesson_id - d_lesson_id;
+                let student_id = student_id(j, iter);
+                let time = "12:00:00";
+                let attendance_date = "2020-09-03";
+                let attendances = vec!["none", "present", "absent", "excused"];
+                let attendance = attendances[lesson_id % attendances.len()];
+                let id = last_reg_id;
+                let class_id = last_reg_id;
+                o_registrations
+                    .write(format!("{};{};{};{}\n", id, lesson_id, student_id, time).as_bytes())
+                    .unwrap();
+
+                // Mark the student's attendance on the lesson
+                o_classes
+                    .write(
+                        format!(
+                            "{};{};{};{};{}\n",
+                            class_id, student_id, lesson_id, attendance_date, attendance
+                        )
+                        .as_bytes(),
+                    )
+                    .unwrap();
+                // Excuse if necessary
+                if attendance == "excused" {
+                    o_excuses
+                        .write(
+                            format!(
+                                "{};{};{}\n",
+                                last_excuse_id,
+                                j - (c_students - c_teachers),
+                                class_id
+                            )
+                            .as_bytes(),
+                        )
+                        .unwrap();
+                }
+
+                if rng.gen::<f64>() > 0.9 {
+                    let teacher_id = j - (c_students - c_teachers);
+                    let new_classroom = (rng.gen::<f64>() * c_max_classroom as f64) as i64 + 1;
+
+                    o_substitutions
+                        .write(
+                            format!("{};{};{};{}\n", last_substitution_id, teacher_id, class_id, new_classroom)
+                                .as_bytes(),
+                        )
+                        .unwrap();
+                    last_substitution_id += 1;
+                }
+
+                last_reg_id += 1;
+            }
         } else if j < c_parents {
             o_parent.write(gen_parent(j, iter).as_bytes()).unwrap();
             o_parenthood

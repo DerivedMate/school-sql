@@ -12,12 +12,23 @@ create table if not exists `cell` (
 load data local infile 'gen/out/cell.csv' into table `cell` fields terminated by ';' ignore 1 lines;
 
 
+create table if not exists `class` (
+	id int primary key,
+	student_id int not null,
+	lesson_id int not null,
+	date date,
+	attendance varchar(7)
+);
+load data local infile 'gen/out/class.csv' into table `class` fields terminated by ';' ignore 1 lines;
+
+
 create table if not exists `course` (
 	id int primary key,
 	subject_id int not null,
 	nr int,
 	spec tinyint,
-	hours int
+	hours int,
+	slots int
 );
 load data local infile 'gen/out/course.csv' into table `course` fields terminated by ';' ignore 1 lines;
 
@@ -28,6 +39,14 @@ create table if not exists `course_req` (
 	required_id int not null
 );
 load data local infile 'gen/out/course_req.csv' into table `course_req` fields terminated by ';' ignore 1 lines;
+
+
+create table if not exists `excuse` (
+	id tinyint primary key,
+	excuser_id int not null,
+	class_id int not null
+);
+load data local infile 'gen/out/excuse.csv' into table `excuse` fields terminated by ';' ignore 1 lines;
 
 
 create table if not exists `group` (
@@ -44,6 +63,7 @@ create table if not exists `lesson` (
 	course_id int not null,
 	teacher_id int not null,
 	trimester_id int not null,
+	classroom int,
 	color char(6)
 );
 load data local infile 'gen/out/lesson.csv' into table `lesson` fields terminated by ';' ignore 1 lines;
@@ -89,6 +109,15 @@ create table if not exists `period` (
 load data local infile 'gen/out/period.csv' into table `period` fields terminated by ';' ignore 1 lines;
 
 
+create table if not exists `registration` (
+	id int primary key,
+	lesson_id int not null,
+	student_id int not null,
+	time time
+);
+load data local infile 'gen/out/registration.csv' into table `registration` fields terminated by ';' ignore 1 lines;
+
+
 create table if not exists `student` (
 	id int primary key,
 	user_id int not null,
@@ -103,6 +132,15 @@ create table if not exists `subject` (
 	name_short varchar(7)
 );
 load data local infile 'gen/out/subject.csv' into table `subject` fields terminated by ';' ignore 1 lines;
+
+
+create table if not exists `substitution` (
+	id int primary key,
+	teacher_id int not null,
+	class_id int not null,
+	classroom int
+);
+load data local infile 'gen/out/substitution.csv' into table `substitution` fields terminated by ';' ignore 1 lines;
 
 
 create table if not exists `teacher` (

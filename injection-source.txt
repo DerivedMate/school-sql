@@ -1,6 +1,8 @@
 gen/out/cell.csv
+gen/out/class.csv
 gen/out/course.csv
 gen/out/course_req.csv
+gen/out/excuse.csv
 gen/out/group.csv
 gen/out/lesson.csv
 gen/out/major_arche.csv
@@ -8,8 +10,10 @@ gen/out/major_req.csv
 gen/out/parent.csv
 gen/out/parenthood.csv
 gen/out/period.csv
+gen/out/registration.csv
 gen/out/student.csv
 gen/out/subject.csv
+gen/out/substitution.csv
 gen/out/teacher.csv
 gen/out/trimester.csv
 gen/out/user.csv
