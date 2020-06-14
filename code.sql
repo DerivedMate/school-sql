@@ -124,6 +124,19 @@ create table if not exists `major_req` (
 load data local infile 'gen/out/major_req.csv' into table `major_req` fields terminated by ';' ignore 1 lines;
 
 
+create table if not exists `message` (
+	id int primary key,
+	sender_id int not null,
+	receiver_id int not null,
+	title char(9),
+	content text,
+	sent_at datetime,
+	received_at datetime,
+	received tinyint
+);
+load data local infile 'gen/out/message.csv' into table `message` fields terminated by ';' ignore 1 lines;
+
+
 create table if not exists `parent` (
 	id int primary key,
 	user_id int not null
@@ -151,7 +164,7 @@ create table if not exists `registration` (
 	id int primary key,
 	lesson_id int not null,
 	student_id int not null,
-	time time
+	time datetime
 );
 load data local infile 'gen/out/registration.csv' into table `registration` fields terminated by ';' ignore 1 lines;
 

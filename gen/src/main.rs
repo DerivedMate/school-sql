@@ -219,6 +219,10 @@ fn gen_user_groups() {
         "out/behavior.csv",
         b"id;lesson_id;student_id;arche_id;date\n",
     );
+    let mut o_messages = utils::create_table(
+        "out/message.csv",
+        b"id;sender_id;receiver_id;title;content;sent_at;received_at;received\n",
+    );
 
     // Last ids
     let mut last_lesson_id = 0;
@@ -228,7 +232,7 @@ fn gen_user_groups() {
     let mut last_substitution_id = 0;
     let mut last_grade_arche_id = 0;
     let mut last_grade_id = 0;
-
+    let mut last_message_id = 0;
     // input
     let mut rdr = csv::ReaderBuilder::new()
         .delimiter(b';')
@@ -293,7 +297,7 @@ fn gen_user_groups() {
             for d_lesson_id in 0..=7 {
                 let lesson_id = last_lesson_id - d_lesson_id;
                 let student_id = student_id(j, iter);
-                let time = "12:00:00";
+                let registration_time = "2020-09-03 12:00:00";
                 let attendance_date = "2020-09-03";
                 let attendances = vec!["none", "present", "absent", "excused"];
                 let attendance = attendances[lesson_id % attendances.len()];
@@ -302,7 +306,7 @@ fn gen_user_groups() {
                 let teacher_id = j + (c_students - c_teachers);
 
                 utils::write_entry(
-                    format!("{};{};{};{}\n", id, lesson_id, student_id, time),
+                    format!("{};{};{};{}\n", id, lesson_id, student_id, registration_time),
                     &mut o_registrations,
                 );
 
@@ -368,7 +372,6 @@ fn gen_user_groups() {
 
                     last_grade_id += 1;
                 }
-                // Insert behavior
 
                 last_reg_id += 1;
             }
@@ -385,6 +388,31 @@ fn gen_user_groups() {
         */
         if j % c_group_period == 0 {
             utils::write_entry(gen_group(j, iter), &mut o_group);
+        }
+
+        // Insert a message
+        if j % 312 == 0 {
+            let title = "a message";
+            let content = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam sed ante et ex aliquam posuere. Proin imperdiet dui sed ullamcorper tempus. In hac habitasse platea dictumst. Nam tincidunt nisl non est commodo, tincidunt porttitor augue molestie. Phasellus eget magna a elit scelerisque finibus. Nunc sit amet ipsum a nisi eleifend imperdiet sed ac elit. Phasellus eu dui vitae eros ultrices rhoncus eu ut nibh. Morbi euismod lobortis justo, in placerat neque tristique eu. Aliquam mollis lacus et nisi tempus pretium. Pellentesque bibendum sem quis risus efficitur, eu bibendum sem fringilla. Mauris neque nunc, vehicula ut lacus sit amet, malesuada finibus tortor. Morbi eleifend felis id lobortis dapibus. Ut auctor nisi quam, quis scelerisque lacus iaculis in.";
+            let id = last_message_id;
+            let sender_id = j - 50;
+            let receiver_id = j - 300;
+            let sent_at = "2020-09-06 12:00:00";
+            let received = if rng.gen::<f64>() < 0.5 { 1 } else { 0 };
+            let received_at = if received == 1 {
+                "2020-09-06 13:32:00"
+            } else {
+                ""
+            };
+            utils::write_entry(
+                format!(
+                    "{};{};{};{};{};{};{};{}\n",
+                    id, sender_id, receiver_id, title, content, sent_at, received_at, received
+                ),
+                &mut o_messages,
+            );
+
+            last_message_id += 1;
         }
     }
 }
