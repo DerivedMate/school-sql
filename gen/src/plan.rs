@@ -1,6 +1,7 @@
 use std::fs::File;
 use std::io::prelude::*;
 use std::io::BufReader;
+use crate::utils;
 
 #[derive(Debug, Deserialize)]
 pub struct Period {
@@ -21,32 +22,24 @@ fn read_periods() -> Vec<Period> {
 }
 
 pub fn gen_trimesters() {
-    let mut o_trimesters = File::create("out/trimester.csv").unwrap();
+    let mut o_trimesters = utils::create_table("out/trimester.csv", b"id;start_date\n");
 
-    o_trimesters.write(b"id;start_date\n").unwrap();
     for year in c_first_year..=c_last_year {
         let s_days = vec!["09-02", "11-24", "02-16"];
         let n = s_days.len() as i64;
         for (i, s_day) in s_days.iter().enumerate() {
             let start_date = format!("{}-{}", year, s_day);
-            o_trimesters
-                .write(
-                    format!("{};{}\n", (year - c_first_year) * n + i as i64, start_date).as_bytes(),
-                )
-                .unwrap();
+            utils::write_entry(format!("{};{}\n", (year - c_first_year) * n + i as i64, start_date), &mut o_trimesters);
         }
     }
 }
 
 pub fn gen_periods() {
-    let mut o_periods = File::create("out/period.csv").unwrap();
+    let mut o_periods = utils::create_table("out/period.csv", b"id;from;to\n");
 
     let fh = read_periods();
 
-    o_periods.write(b"id;from;to\n").unwrap();
     for (i, p) in fh.iter().enumerate() {
-        o_periods
-            .write(format!("{};{};{}\n", i, p.from, p.to).as_bytes())
-            .unwrap();
+        utils::write_entry(format!("{};{};{}\n", i, p.from, p.to), &mut o_periods);
     }
 }

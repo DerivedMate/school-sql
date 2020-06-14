@@ -12,6 +12,9 @@ pub struct Subject {
 pub const c_max_sub_index: i64 = 13;
 pub const c_course_range: [i64; 2] = [0, 8];
 pub const c_course_range_size: i64 = c_course_range[1] - c_course_range[0] + 1;
+pub const c_max_behavior_id: i64 = 5;
+
+use crate::utils;
 
 pub fn read_subjects() -> Vec<Subject> {
     let file = File::open("./data/subjects.json").unwrap();
@@ -22,35 +25,27 @@ pub fn read_subjects() -> Vec<Subject> {
 
 pub fn gen_subjects() {
     let fh = read_subjects();
-    let mut o_subjects = File::create("out/subject.csv").unwrap();
+    let mut o_subjects = utils::create_table("out/subject.csv", b"id;name;name_short\n");
 
-    o_subjects.write(b"id;name;name_short\n").unwrap();
     for sub in fh.iter() {
-        o_subjects
-            .write(format!("{};{};{}\n", sub.id, sub.name, sub.short).as_bytes())
-            .unwrap();
+        utils::write_entry(
+            format!("{};{};{}\n", sub.id, sub.name, sub.short),
+            &mut o_subjects,
+        );
     }
 }
 
 pub fn gen_courses() {
     let fh = read_subjects();
-    let mut o_courses = File::create("out/course.csv").unwrap();
-    let mut o_course_req = File::create("out/course_req.csv").unwrap();
-    let mut o_major_arches = File::create("out/major_arche.csv").unwrap();
-    let mut o_major_req = File::create("out/major_req.csv").unwrap();
+    let mut o_courses =
+        utils::create_table("out/course.csv", b"id;subject_id;nr;spec;hours;slots\n");
+    let mut o_course_req = utils::create_table("out/course_req.csv", b"id;course_id;required_id\n");
+    let mut o_major_arches =
+        utils::create_table("out/major_arche.csv", b"id;name;subject_id;courses_req\n");
+    let mut o_major_req = utils::create_table("out/major_req.csv", b"id;arche_id;course_id\n");
 
     let mut last_req_id = 0;
     let mut last_major_req_id = 0;
-
-    // Insert headers
-    o_courses
-        .write(b"id;subject_id;nr;spec;hours;slots\n")
-        .unwrap();
-    o_course_req.write(b"id;course_id;required_id\n").unwrap();
-    o_major_arches
-        .write(b"id;name;subject_id;courses_req\n")
-        .unwrap();
-    o_major_req.write(b"id;arche_id;course_id\n").unwrap();
 
     for sub in fh.into_iter() {
         // Insert major arches
@@ -61,15 +56,13 @@ pub fn gen_courses() {
             _ => 0,
         };
 
-        o_major_arches
-            .write(
-                format!(
-                    "{};{};{};{}\n",
-                    id_major_arche, name_major_arche, sub.id, nr_courses_req
-                )
-                .as_bytes(),
-            )
-            .unwrap();
+        utils::write_entry(
+            format!(
+                "{};{};{};{}\n",
+                id_major_arche, name_major_arche, sub.id, nr_courses_req
+            ),
+            &mut o_major_arches,
+        );
 
         // Insert courses
         for i in c_course_range[0]..c_course_range[1] {
@@ -88,32 +81,26 @@ pub fn gen_courses() {
 
             // Add all requirements explicitly
             // Insert base
-            o_courses
-                .write(
-                    format!(
-                        "{};{};{};{};{};{}\n",
-                        id_base, sub_id, nr_base, 0, hours, slots
-                    )
-                    .as_bytes(),
-                )
-                .unwrap();
+            utils::write_entry(
+                format!(
+                    "{};{};{};{};{};{}\n",
+                    id_base, sub_id, nr_base, 0, hours, slots
+                ),
+                &mut o_courses,
+            );
             // Insert spec
-            o_courses
-                .write(
-                    format!(
-                        "{};{};{};{};{};{}\n",
-                        id_spec, sub_id, nr_spec, 1, hours, slots
-                    )
-                    .as_bytes(),
-                )
-                .unwrap();
+            utils::write_entry(
+                format!(
+                    "{};{};{};{};{};{}\n",
+                    id_spec, sub_id, nr_spec, 1, hours, slots
+                ),
+                &mut o_courses,
+            );
             if nr_courses_req == 0 {
-                o_major_req
-                    .write(
-                        format!("{};{};{}\n", last_major_req_id, id_major_arche, id_spec)
-                            .as_bytes(),
-                    )
-                    .unwrap();
+                utils::write_entry(
+                    format!("{};{};{}\n", last_major_req_id, id_major_arche, id_spec),
+                    &mut o_major_req,
+                );
 
                 last_major_req_id += 1;
             }
@@ -124,18 +111,41 @@ pub fn gen_courses() {
                 if id_req >= id_spec {
                     break;
                 }
-                o_course_req
-                    .write(format!("{};{};{}\n", last_req_id, id_spec, id_req).as_bytes())
-                    .unwrap();
+                utils::write_entry(
+                    format!("{};{};{}\n", last_req_id, id_spec, id_req),
+                    &mut o_course_req,
+                );
                 last_req_id += 1;
 
                 if j % 2 == 0 && id_req != id_base {
-                    o_course_req
-                        .write(format!("{};{};{}\n", last_req_id, id_base, iter_id + j).as_bytes())
-                        .unwrap();
+                    utils::write_entry(
+                        format!("{};{};{}\n", last_req_id, id_base, iter_id + j),
+                        &mut o_course_req,
+                    );
                     last_req_id += 1;
                 }
             }
         }
+    }
+}
+
+pub fn gen_behavior_arches() {
+    let mut o_behavior_arches = utils::create_table("out/behavior_arche.csv", b"id;name;points\n");
+
+    for (i, (name, points)) in vec![
+        ("are you having a laugh", 0),
+        ("ya ain't good enough", 1),
+        ("pandejo", 2),
+        ("decent", 3),
+        ("snazzy", 4),
+        ("sublime", 5),
+    ]
+    .iter()
+    .enumerate()
+    {
+        utils::write_entry(
+            format!("{};{};{}\n", i, name, points),
+            &mut o_behavior_arches,
+        );
     }
 }

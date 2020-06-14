@@ -3,6 +3,24 @@ use proyecto;
 set global local_infile = True;
 
 
+create table if not exists `behavior_arche` (
+	id int primary key,
+	name varchar(22),
+	points int
+);
+load data local infile 'gen/out/behavior_arche.csv' into table `behavior_arche` fields terminated by ';' ignore 1 lines;
+
+
+create table if not exists `behavior` (
+	id int primary key,
+	lesson_id int not null,
+	student_id int not null,
+	arche_id int not null,
+	date date
+);
+load data local infile 'gen/out/behavior.csv' into table `behavior` fields terminated by ';' ignore 1 lines;
+
+
 create table if not exists `cell` (
 	id int primary key,
 	period_id int not null,
@@ -42,11 +60,31 @@ load data local infile 'gen/out/course_req.csv' into table `course_req` fields t
 
 
 create table if not exists `excuse` (
-	id tinyint primary key,
+	id int primary key,
 	excuser_id int not null,
 	class_id int not null
 );
 load data local infile 'gen/out/excuse.csv' into table `excuse` fields terminated by ';' ignore 1 lines;
+
+
+create table if not exists `grade_arche` (
+	id int primary key,
+	lesson_id int not null,
+	name char(7),
+	max int
+);
+load data local infile 'gen/out/grade_arche.csv' into table `grade_arche` fields terminated by ';' ignore 1 lines;
+
+
+create table if not exists `grade` (
+	id int primary key,
+	arche_id int not null,
+	teacher_id int not null,
+	student_id int not null,
+	points int,
+	date date
+);
+load data local infile 'gen/out/grade.csv' into table `grade` fields terminated by ';' ignore 1 lines;
 
 
 create table if not exists `group` (

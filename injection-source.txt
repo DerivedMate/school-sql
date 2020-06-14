@@ -1,8 +1,12 @@
+gen/out/behavior_arche.csv
+gen/out/behavior.csv
 gen/out/cell.csv
 gen/out/class.csv
 gen/out/course.csv
 gen/out/course_req.csv
 gen/out/excuse.csv
+gen/out/grade_arche.csv
+gen/out/grade.csv
 gen/out/group.csv
 gen/out/lesson.csv
 gen/out/major_arche.csv

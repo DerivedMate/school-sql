@@ -27,6 +27,7 @@ const c_grade_max_step: i64 = 5;
 
 mod plan;
 mod subjects;
+mod utils;
 
 #[derive(Debug, Deserialize)]
 struct User {
@@ -188,19 +189,36 @@ fn gen_parenthood(j: i64, iter: i64) -> String {
 fn gen_user_groups() {
     let mut rng = rand::thread_rng();
     // output files
-    let mut o_students = File::create("out/student.csv").unwrap();
-    let mut o_teachers = File::create("out/teacher.csv").unwrap();
-    let mut o_parent = File::create("out/parent.csv").unwrap();
-    let mut o_parenthood = File::create("out/parenthood.csv").unwrap();
-    let mut o_group = File::create("out/group.csv").unwrap();
-    let mut o_lessons = File::create("out/lesson.csv").unwrap();
-    let mut o_cells = File::create("out/cell.csv").unwrap();
-    let mut o_registrations = File::create("out/registration.csv").unwrap();
-    let mut o_classes = File::create("out/class.csv").unwrap();
-    let mut o_excuses = File::create("out/excuse.csv").unwrap();
-    let mut o_substitutions = File::create("out/substitution.csv").unwrap();
-    let mut o_grade_arches = File::create("out/grade_arche.csv").unwrap();
-    let mut o_grades = File::create("out/grade.csv").unwrap();
+    let mut o_students = utils::create_table("out/student.csv", b"id;user_id;group_id\n");
+    let mut o_teachers = utils::create_table("out/teacher.csv", b"id;user_id;title;is_head\n");
+    let mut o_parent = utils::create_table("out/parent.csv", b"id;user_id\n");
+    let mut o_parenthood = utils::create_table("out/parenthood.csv", b"id;parent_id;student_id\n");
+    let mut o_group = utils::create_table("out/group.csv", b"id;teacher_id;name;start_year\n");
+    let mut o_lessons = utils::create_table(
+        "out/lesson.csv",
+        b"id;course_id;teacher_id;trimester_id;classroom;color\n",
+    );
+    let mut o_cells = utils::create_table("out/cell.csv", b"id;period_id;lesson_id;week_day\n");
+    let mut o_registrations =
+        utils::create_table("out/registration.csv", b"id;lesson_id;student_id;time\n");
+    let mut o_classes = utils::create_table(
+        "out/class.csv",
+        b"id;student_id;lesson_id;date;attendance\n",
+    );
+    let mut o_excuses = utils::create_table("out/excuse.csv", b"id;excuser_id;class_id\n");
+    let mut o_substitutions = utils::create_table(
+        "out/substitution.csv",
+        b"id;teacher_id;class_id;classroom\n",
+    );
+    let mut o_grade_arches = utils::create_table("out/grade_arche.csv", b"id;lesson_id;name;max\n");
+    let mut o_grades = utils::create_table(
+        "out/grade.csv",
+        b"id;arche_id;teacher_id;student_id;points;date\n",
+    );
+    let mut o_behavior = utils::create_table(
+        "out/behavior.csv",
+        b"id;lesson_id;student_id;arche_id;date\n",
+    );
 
     // Last ids
     let mut last_lesson_id = 0;
@@ -217,31 +235,6 @@ fn gen_user_groups() {
         .from_path("out/user.csv")
         .unwrap();
 
-    // print headers
-    o_students.write(b"id;user_id;group_id\n").unwrap();
-    o_teachers.write(b"id;user_id;title;is_head\n").unwrap();
-    o_parent.write(b"id;user_id\n").unwrap();
-    o_parenthood.write(b"id;parent_id;student_id\n").unwrap();
-    o_group.write(b"id;teacher_id;name;start_year\n").unwrap();
-    o_lessons
-        .write(b"id;course_id;teacher_id;trimester_id;classroom;color\n")
-        .unwrap();
-    o_cells.write(b"id;period_id;lesson_id;week_day\n").unwrap();
-    o_registrations
-        .write(b"id;lesson_id;student_id;time\n")
-        .unwrap();
-    o_classes
-        .write(b"id;student_id;lesson_id;date;attendance\n")
-        .unwrap();
-    o_excuses.write(b"id;excuser_id;class_id\n").unwrap();
-    o_substitutions
-        .write(b"id;teacher_id;class_id;classroom\n")
-        .unwrap();
-    o_grade_arches.write(b"id;lesson_id;name;max\n").unwrap();
-    o_grades
-        .write(b"id;arche_id;teacher_id;student_id;points;date\n")
-        .unwrap();
-
     for (i, r_u) in rdr.deserialize().enumerate() {
         let i = i as i64;
         let j = i % c_iter_size;
@@ -250,9 +243,7 @@ fn gen_user_groups() {
 
         if j < c_teachers {
             let is_head = j % 373 == 0 && iter % 1000 == 0;
-            o_teachers
-                .write(gen_teacher(&u, j, iter, is_head).as_bytes())
-                .unwrap();
+            utils::write_entry(gen_teacher(&u, j, iter, is_head), &mut o_teachers);
             // Generate the teacher's lessons
             let teacher_id = iter * c_teachers + j;
             for trimester_id in (plan::c_max_trimester_id - 5)..=plan::c_max_trimester_id {
@@ -262,27 +253,23 @@ fn gen_user_groups() {
                 let color = hex::encode(vec![color.r, color.g, color.b]);
                 let classroom = (rng.gen::<f64>() * c_max_classroom as f64) as i64 + 1;
                 let lesson_id = last_lesson_id;
-                o_lessons
-                    .write(
-                        format!(
-                            "{};{};{};{};{};{}\n",
-                            lesson_id, course_id, teacher_id, trimester_id, classroom, color
-                        )
-                        .as_bytes(),
-                    )
-                    .unwrap();
+                utils::write_entry(
+                    format!(
+                        "{};{};{};{};{};{}\n",
+                        lesson_id, course_id, teacher_id, trimester_id, classroom, color
+                    ),
+                    &mut o_lessons,
+                );
 
                 // Insert grade arches
                 for grade_nr in 0..c_grades_per_lesson {
                     let max = (grade_nr + 1) * c_grade_max_step;
                     let name = format!("grade {}", grade_nr);
 
-                    o_grade_arches
-                        .write(
-                            format!("{};{};{};{}\n", last_grade_arche_id, lesson_id, name, max)
-                                .as_bytes(),
-                        )
-                        .unwrap();
+                    utils::write_entry(
+                        format!("{};{};{};{}\n", last_grade_arche_id, lesson_id, name, max),
+                        &mut o_grade_arches,
+                    );
                     last_grade_arche_id += 1;
                 }
 
@@ -290,21 +277,19 @@ fn gen_user_groups() {
                 let p = ((plan::c_max_period_id - 1) as f64 * rng.gen::<f64>()) as i64;
                 for week_day in 0..=4 {
                     let period_id = if week_day == 1 { p + 1 } else { p };
-                    o_cells
-                        .write(
-                            format!(
-                                "{};{};{};{}\n",
-                                last_cell_id, period_id, last_lesson_id, week_day
-                            )
-                            .as_bytes(),
-                        )
-                        .unwrap();
+                    utils::write_entry(
+                        format!(
+                            "{};{};{};{}\n",
+                            last_cell_id, period_id, last_lesson_id, week_day
+                        ),
+                        &mut o_cells,
+                    );
                     last_cell_id += 1;
                 }
                 last_lesson_id += 1;
             }
         } else if j < c_students {
-            o_students.write(gen_student(j, iter).as_bytes()).unwrap();
+            utils::write_entry(gen_student(j, iter), &mut o_students);
             for d_lesson_id in 0..=7 {
                 let lesson_id = last_lesson_id - d_lesson_id;
                 let student_id = student_id(j, iter);
@@ -314,81 +299,82 @@ fn gen_user_groups() {
                 let attendance = attendances[lesson_id % attendances.len()];
                 let id = last_reg_id;
                 let class_id = last_reg_id;
-                o_registrations
-                    .write(format!("{};{};{};{}\n", id, lesson_id, student_id, time).as_bytes())
-                    .unwrap();
+                let teacher_id = j + (c_students - c_teachers);
+
+                utils::write_entry(
+                    format!("{};{};{};{}\n", id, lesson_id, student_id, time),
+                    &mut o_registrations,
+                );
 
                 // Mark the student's attendance on the lesson
-                o_classes
-                    .write(
-                        format!(
-                            "{};{};{};{};{}\n",
-                            class_id, student_id, lesson_id, attendance_date, attendance
-                        )
-                        .as_bytes(),
-                    )
-                    .unwrap();
+                utils::write_entry(
+                    format!(
+                        "{};{};{};{};{}\n",
+                        class_id, student_id, lesson_id, attendance_date, attendance
+                    ),
+                    &mut o_classes,
+                );
                 // Excuse if necessary
                 if attendance == "excused" {
-                    o_excuses
-                        .write(
-                            format!(
-                                "{};{};{}\n",
-                                last_excuse_id,
-                                j + (c_students - c_teachers),
-                                class_id
-                            )
-                            .as_bytes(),
-                        )
-                        .unwrap();
+                    utils::write_entry(
+                        format!("{};{};{}\n", last_excuse_id, teacher_id, class_id),
+                        &mut o_excuses,
+                    );
                     last_excuse_id += 1;
                 }
 
+                // insert a substitution
                 if rng.gen::<f64>() > 0.9 {
                     let teacher_id = j - (c_students - c_teachers);
                     let new_classroom = (rng.gen::<f64>() * c_max_classroom as f64) as i64 + 1;
 
-                    o_substitutions
-                        .write(
-                            format!(
-                                "{};{};{};{}\n",
-                                last_substitution_id, teacher_id, class_id, new_classroom
-                            )
-                            .as_bytes(),
-                        )
-                        .unwrap();
+                    utils::write_entry(
+                        format!(
+                            "{};{};{};{}\n",
+                            last_substitution_id, teacher_id, class_id, new_classroom
+                        ),
+                        &mut o_substitutions,
+                    );
                     last_substitution_id += 1;
                 }
+
+                // Insert behavior
+                let behavior_id =
+                    (rng.gen::<f64>() * (subjects::c_max_behavior_id + 1) as f64) as i64;
+                let behavior_date = "2020-09-32";
+                utils::write_entry(
+                    format!(
+                        "{};{};{};{};{}\n",
+                        last_reg_id, lesson_id, student_id, behavior_id, behavior_date
+                    ),
+                    &mut o_behavior,
+                );
 
                 // Insert grades
                 for d_grade_id in 0..c_grades_per_lesson {
                     let arche_id = last_grade_arche_id - d_grade_id;
                     let grade_id = last_grade_id;
-                    let teacher_id = j + (c_students - c_teachers);
                     let max = (c_grades_per_lesson + 1 - d_grade_id) * c_grade_max_step;
                     let points = (rng.gen::<f64>() * max as f64) as i64;
                     let date = "2020-09-04";
 
-                    o_grades
-                        .write(
-                            format!(
-                                "{};{};{};{};{};{}\n",
-                                grade_id, arche_id, teacher_id, student_id, points, date
-                            )
-                            .as_bytes(),
-                        )
-                        .unwrap();
+                    utils::write_entry(
+                        format!(
+                            "{};{};{};{};{};{}\n",
+                            grade_id, arche_id, teacher_id, student_id, points, date
+                        ),
+                        &mut o_grades,
+                    );
 
                     last_grade_id += 1;
                 }
+                // Insert behavior
 
                 last_reg_id += 1;
             }
         } else if j < c_parents {
-            o_parent.write(gen_parent(j, iter).as_bytes()).unwrap();
-            o_parenthood
-                .write(gen_parenthood(j, iter).as_bytes())
-                .unwrap();
+            utils::write_entry(gen_parent(j, iter), &mut o_parent);
+            utils::write_entry(gen_parenthood(j, iter), &mut o_parenthood);
         } else {
             eprintln!("Unmatched range: {}", j);
         }
@@ -398,7 +384,7 @@ fn gen_user_groups() {
             Triggers at the beginning of a new iteration
         */
         if j % c_group_period == 0 {
-            o_group.write(gen_group(j, iter).as_bytes()).unwrap();
+            utils::write_entry(gen_group(j, iter), &mut o_group);
         }
     }
 }
@@ -406,6 +392,7 @@ fn gen_user_groups() {
 fn main() {
     subjects::gen_subjects();
     subjects::gen_courses();
+    subjects::gen_behavior_arches();
 
     gen_users();
     gen_user_groups();
